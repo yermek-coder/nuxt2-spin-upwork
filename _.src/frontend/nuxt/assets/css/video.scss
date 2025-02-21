@@ -1,0 +1,19 @@
+.video-dialog {
+    height: 100dvh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    .v-btn {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 999;
+    }
+
+    .v-vlite {
+        height: 100%;
+        width: 100%;
+    }
+}

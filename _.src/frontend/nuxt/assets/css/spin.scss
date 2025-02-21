@@ -1,0 +1,43 @@
+.spin-screen {
+    position: relative;
+    background: linear-gradient(180deg, #2E6EA3 0%, #042739 100%);
+    height: 100%;
+    padding-top: 2rem !important;
+    padding-inline: 1.5rem;
+}
+
+.spin-screen .row,
+.spin-screen-content {
+    height: 100%;
+}
+
+.spin-screen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/decorations/bg.svg) no-repeat center / cover;
+    mix-blend-mode: multiply;
+    filter: brightness(0.5) contrast(1.5) hue-rotate(20deg);
+}
+
+.spin-screen-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.spin-screen-content-button-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 48px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}

@@ -1,0 +1,339 @@
+/* TITLE */
+.reward-title {
+    background: url("/decorations/title-bg-2.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 0.25rem 2.5rem 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 0.625rem;
+}
+
+.reward-title>span {
+    filter: drop-shadow(0 1.5px 0 #113682) drop-shadow(0 2px 4px rgba(17, 54, 130, 0.4));
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #113682;
+    paint-order: stroke fill;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+/* PROGRESS */
+.reward-progress {
+    height: 0.8125rem;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(0deg, #CE8749 0%, #E2C2AE 75%);
+    outline: #6D4320 solid 1px;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px white, 0 2px 4px rgba(0, 0, 0, .5);
+    margin-top: 1.75rem;
+    margin-inline: 0.75rem;
+}
+
+.reward-progress-meter {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    box-shadow: inset 0 -2px 2px rgba(21, 255, 0, 0.5), inset 0 2px 2px rgba(21, 255, 0, 0.5);
+    outline: rgba(23, 72, 5, .8) solid 1px;
+    background-color: #138217;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.reward-progress-meter::after {
+    content: "";
+    background-color: rgba(255, 255, 255, 0.7);
+    mix-blend-mode: soft-light;
+    height: 5px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.reward-progress-step {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.reward-progress-step-title {
+    font-size: 0.625rem;
+}
+
+.reward-progress-step-icon {
+    position: absolute;
+    top: -0.15rem;
+    transform: translateY(-100%);
+    height: 1.5rem;
+    width: 1.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.reward-progress-card {
+    padding: 0.6875rem 0.5rem;
+    height: 4.125rem;
+    display: flex;
+    border-radius: 12px;
+    border: 1.5px solid #3F2815;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #FFF8C0 3%, #E5C55D 100%);
+    margin-bottom: 0.75rem;
+}
+
+.reward-progress-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #937235;
+}
+
+.reward-progress-card::before {
+    content: "";
+    position: absolute;
+    border-radius: 3px;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 6px;
+    background: linear-gradient(180deg, #FFF8C0 26%, #FFF2B9 36%, #EDD35E 64%, #DCBA52 97%);
+}
+
+
+/* REWARD SCREEN GENERAL */
+.reward-screen {
+    position: relative;
+    background: linear-gradient(180deg, #2E6EA3 0%, #042739 100%);
+    padding-top: 5.32rem !important;
+    padding-bottom: 3rem !important;
+    height: 100%;
+}
+
+.reward-screen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/decorations/bg.svg) no-repeat center / cover;
+    mix-blend-mode: multiply;
+    filter: brightness(0.5) contrast(1.5) hue-rotate(20deg);
+}
+
+.reward-screen-content {
+    position: relative;
+    z-index: 1;
+    max-width: 15rem;
+    margin-inline: auto;
+}
+
+.reward-screen-content-text-gold {
+    color: #FFF2A9;
+    -webkit-text-fill-color: #FFF2A9;
+    -webkit-text-stroke-width: 0.4px;
+    -webkit-text-stroke-color: #43270F;
+    paint-order: stroke fill;
+    filter: drop-shadow(0 0.5px 2px rgba(67, 39, 15, 0.4)) drop-shadow(0 0.7px 0 #43270F);
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-size: 0.625rem;
+}
+
+.reward-progress-grid {
+    padding: 12px 6px;
+}
+
+.reward-progress-grid .col {
+    padding: 12px 6px;
+}
+
+.reward-screen-content-last-day,
+.reward-screen-content-timer,
+.reward-screen-content-call {
+    color: white;
+    font-size: 0.625rem;
+    text-align: center;
+}
+
+.reward-screen-content-timer {
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.reward-screen-content-call {
+    font-size: 1.25rem;
+}
+
+.reward-screen-content-line {
+    position: relative;
+}
+
+.reward-screen-content-line::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 50%;
+    background-color: white;
+    height: 1px;
+}
+
+/* CARD */
+.reward-day-card {
+    height: auto;
+    aspect-ratio: 76 / 97;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: url("/decorations/day-card-bg.svg") no-repeat center / cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    border: 1px solid #43270F;
+}
+
+.reward-day-card.active {
+    background: url("/decorations/day-card-bg-active.svg") no-repeat center / cover;
+    box-shadow: 0 0 20px #0095FF, 0 0 5px #FFFFFF, 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.reward-day-card.passive {
+    filter: brightness(0.7);
+    pointer-events: none;
+}
+
+.reward-day-card-title {
+    height: 1.125rem;
+    flex: 0 0 auto;
+    position: relative;
+    text-align: center;
+    font-size: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reward-day-card-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.125rem;
+}
+
+.reward-day-card-info {
+    position: absolute;
+    right: 0.48rem;
+    bottom: 0.3rem;
+}
+
+.reward-day-card-info-text {
+    letter-spacing: -0.75px;
+}
+
+.reward-steps {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.reward-steps svg:first-child {
+    margin-right: -0.9rem;
+}
+
+.reward-steps svg:last-child {
+    margin-left: -0.9rem;
+}
+
+.reward-steps svg:nth-child(2) {
+    position: relative;
+    z-index: 1;
+}
+
+/* DIALOG */
+
+.reward-collected-dialog-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.reward-collected-dialog-body {
+    background: url(/decorations/reward-result-card-bg.svg) no-repeat center / contain;
+    width: 11.6rem;
+    height: 16.4rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8.86px 0 rgba(0, 0, 0, 0.3);
+}
+
+.reward-collected-dialog-card {
+    background: url(/decorations/reward-result-card-slug.svg) no-repeat center / contain;
+    height: 7.375rem;
+    width: 7.375rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reward-collected-dialog-card-info {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke-width: 0.74px;
+    -webkit-text-stroke-color: #3E3E3E;
+    paint-order: stroke fill;
+    filter: drop-shadow(0 0.75px 3.75px rgba(0, 0, 0, 0.8)) drop-shadow(0 1.48px 0 black);
+    font-size: 1.5rem;
+}
+
+.reward-collected-dialog-card-icon {
+    font-size: 4.6875rem;
+}
+
+.reward-collected-dialog-message {
+    font-size: 20px;
+    line-height: 1;
+    color: white;
+}
+
+.reward-collected-dialog-card-reward-type {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0.7rem;
+    font-size: 23.62px;
+    color: white;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke-width: 0.4px;
+    -webkit-text-stroke-color: #3B3B3B;
+    paint-order: stroke fill;
+    filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.8)) drop-shadow(0 0.75px 0 black);
+}
+
+.reward-collected-dialog-wrapper {
+    overflow: hidden !important;
+}

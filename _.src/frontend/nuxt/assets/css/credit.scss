@@ -1,0 +1,47 @@
+.voucher-item-divider {
+    width: 2px;
+    background: url(/decorations/voucher-bg.svg);
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 13px;
+        height: 13px;
+        background-color: var(--bg-body);
+        border-radius: 400px;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        width: 13px;
+        height: 13px;
+        background-color: var(--bg-body);
+        border-radius: 400px;
+    }
+}
+
+.voucher-item.passive {
+    pointer-events: none;
+
+    &>* {
+        opacity: 0.5;
+    }
+}
+
+.voucher-page-bottom-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.credit-my-rewards-nav .v-chip {
+    height: 44px !important;
+}

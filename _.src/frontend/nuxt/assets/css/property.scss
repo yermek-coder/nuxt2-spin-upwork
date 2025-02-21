@@ -1,0 +1,148 @@
+.property-card {
+    height: fit-content;
+    outline: #E6E6E6 solid 1px !important;
+}
+
+.property-card.horizontal {
+    display: flex;
+    gap: 0.5rem;
+
+    .property-card-image .v-image {
+        height: 100% !important;
+    }
+
+    hr {
+        display: none;
+    }
+
+    .property-card-body {
+        padding-block: 0.5rem;
+    }
+
+    .property-card-footer {
+        text-align: start;
+    }
+}
+
+.property-card-image {
+    position: relative;
+}
+
+.property-card-image-badge {
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    left: -3px;
+
+    &-decor {
+        position: absolute;
+        height: 1px;
+        width: 2px;
+        left: 0;
+        top: -1px;
+        border-top-left-radius: 1px;
+    }
+}
+
+.property-card-button-vr {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.38);
+}
+
+.property-card-footer {
+    line-height: 1;
+    text-align: center;
+}
+
+.properties-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1rem;
+    row-gap: 0.625rem;
+}
+
+.properties-list-single-col {
+    grid-template-columns: 1fr;
+}
+
+.properties-promos {
+    white-space: nowrap;
+    -ms-overflow-style: none;
+}
+
+.properties-promos-descr {
+    max-width: 65%;
+}
+
+.properties-promos-item {
+    min-width: 20rem;
+}
+
+.properties-promos-item:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.property-launches-body-item {
+    position: relative;
+}
+
+.property-launches-body-item-marker {
+    position: absolute !important;
+    left: 0.25rem;
+    top: 0.25rem;
+}
+
+.property-feature-tabs-price-chip {
+    width: 100%;
+}
+
+.property-feature-tabs-price .v-slider__thumb-label {
+    transform: translate(-50%, 50%) !important;
+    bottom: unset !important;
+    top: 100%;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    box-shadow: 0 8px 12px -5px rgba(0, 0, 0, 0.12);
+}
+
+.property-feature-tabs-price .v-slider--horizontal .v-slider__thumb-label>* {
+    transform: none;
+}
+
+.property-feature-tabs-area>.v-list {
+    &:first-child {
+        width: 80px;
+    }
+
+    &:nth-child(2) {
+        width: calc(100% - 80px)
+    }
+}
+
+.property-feature-tabs-area.active-third-col>.v-list:nth-child(2) {
+    width: calc((100% - 80px) / 2)
+}
+
+.property-feature-tabs-house-type .v-chip,
+.property-feature-tabs-more .v-chip {
+    width: 100%;
+}
+
+.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)>.v-input__control>.v-input__slot fieldset {
+    color: #EDEDF3 !important;
+}
+
+.property-search input {
+    caret-color: grey;
+}
+
+// .property-search.v-text-field--outlined.v-input--is-focused fieldset,
+// .v-text-field--outlined.v-input--has-state fieldset {
+//     border: 2px solid #d4d4db !important;
+// }

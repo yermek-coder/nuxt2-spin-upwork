@@ -1,0 +1,83 @@
+:root {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.urbanist-black {
+  font-family: "Urbanist", serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.urbanist-extra-bold {
+  font-family: "Urbanist", serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.urbanist-bold {
+  font-family: "Urbanist", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.urbanist-semi-bold {
+  font-family: "Urbanist", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.urbanist-medium {
+  font-family: "Urbanist", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.urbanist-shadow {
+  filter: drop-shadow(0 0.5px 2px rgba(109, 67, 32, .4)) drop-shadow(0 0.7px 0 #6D4320);
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 0.4px;
+  -webkit-text-stroke-color: #6D4320;
+  paint-order: stroke fill;
+}
+
+.urbanist-white-shadow {
+  filter: drop-shadow(0 0.5px 2.54px rgba(0, 0, 0, 0.8)) drop-shadow(0 1px 0 black);
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #3E3E3E;
+  paint-order: stroke fill;
+  color: white;
+}
+
+.text-h7 {
+  font-size: 1.125rem;
+}
+
+.text-body-3 {
+  font-size: 0.75rem !important;
+}
+
+.text-body-4 {
+  font-size: 0.625rem !important;
+}
+
+.text-body-5 {
+  font-size: 0.5rem !important;
+}
+
+.text-body-6 {
+  font-size: 0.25rem !important;
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.lh-1 {
+  line-height: 1 !important;
+}

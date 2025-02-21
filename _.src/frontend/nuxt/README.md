@@ -1,0 +1,1 @@
+Complex Nuxt 2 project for client on Upwork. Includes wheel of fortune and Vuetify components. In development and not connected to backend yet
