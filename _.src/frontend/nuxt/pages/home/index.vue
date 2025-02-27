@@ -12,7 +12,7 @@
             </v-container>
         </div>
 
-        <div v-touch="{ left: () => folded = true, right: () => folded = false }">
+        <div>
             <v-container class="home-links pt-6 pb-0">
                 <NuxtLink v-for="link in links" :key="link.path" :to="link.path"
                     class="home-links-link d-flex flex-column align-center px-1">
@@ -26,25 +26,12 @@
                 </NuxtLink>
             </v-container>
 
-            <HomeFeatures :folded="folded" class="mb-8" />
+            <HomeFeatures class="mb-8" />
         </div>
 
         <PropertyPromos />
 
-        <v-container>
-            <div class="home-services rounded-lg-2 overflow-hidden">
-                <div class="home-services-header py-3 px-2 d-flex gap-3">
-                    <Icon icon="shield-check" />
-                    <span class="text-uppercase font-weight-bold white--text text-body-3">TOP SERVICES SEARCH</span>
-                </div>
-                <div class="home-services-body pa-3">
-                    <div v-for="(item, idx) in services" :key="idx" class="d-flex flex-column align-center">
-                        <Icon :icon="item.icon" />
-                        <div class="text-body-4">{{ item.title }}</div>
-                    </div>
-                </div>
-            </div>
-        </v-container>
+        <HomeServices />
 
         <v-container class="home-videos mb-5">
             <div class="d-flex align-center justify-space-between mb-4">
@@ -89,49 +76,6 @@ export default {
     layout: "home",
     data() {
         return {
-            folded: true,
-            services: [
-                {
-                    title: "Moving",
-                    icon: "wheel"
-                },
-                {
-                    title: "Electrical",
-                    icon: "electrical"
-                },
-                {
-                    title: "Design",
-                    icon: "design"
-                },
-                {
-                    title: "Landscape",
-                    icon: "leaf"
-                },
-                {
-                    title: "Furniture",
-                    icon: "furniture"
-                },
-                {
-                    title: "Internet",
-                    icon: "internet"
-                },
-                {
-                    title: "Water",
-                    icon: "water"
-                },
-                {
-                    title: "Cleaner",
-                    icon: "clean"
-                },
-                {
-                    title: "Plumbers",
-                    icon: "shower"
-                },
-                {
-                    title: "Wireman",
-                    icon: "wire"
-                },
-            ],
             videos: [
                 { src: "/video.mp4", thumbnail: "/video-thumbnail.webp" },
                 { src: "/video.mp4", thumbnail: "/video-thumbnail.webp" },

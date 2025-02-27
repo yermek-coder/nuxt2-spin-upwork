@@ -67,10 +67,14 @@
 }
 
 .text-body-5 {
-  font-size: 0.5rem !important;
+  font-size: 0.5625rem !important;
 }
 
 .text-body-6 {
+  font-size: 0.5rem !important;
+}
+
+.text-body-7 {
   font-size: 0.25rem !important;
 }
 
@@ -80,4 +84,8 @@
 
 .lh-1 {
   line-height: 1 !important;
+}
+
+.text-secondary-2 {
+  color: var(--color-text-secondary-2);
 }

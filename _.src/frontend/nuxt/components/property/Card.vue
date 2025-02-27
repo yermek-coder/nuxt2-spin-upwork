@@ -12,7 +12,7 @@
                 <button v-if="property.vr" class="property-card-button-vr px-2 py-1 rounded-xl d-flex">
                     <Icon icon="vr" />
                 </button>
-                <div class="white--text text-body-5 d-flex gap-1 align-center pa-2"><v-icon
+                <div class="white--text text-body-6 d-flex gap-1 align-center pa-2"><v-icon
                         class="white--text text-caption">mdi-map-marker</v-icon>
                     {{ property.location }}
                 </div>

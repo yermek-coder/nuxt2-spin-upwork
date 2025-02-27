@@ -23,7 +23,7 @@
                         <v-icon class="text-body-1">mdi-chevron-right</v-icon>
                     </div>
                 </div>
-                <v-card-subtitle class="pa-0 text-body-5 lh-1 mb-3">
+                <v-card-subtitle class="pa-0 text-body-6 lh-1 mb-3">
                     Explore new and upcoming property launches in Malaysia
                 </v-card-subtitle>
 
