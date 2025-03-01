@@ -6,10 +6,10 @@
                 <span class="text-uppercase font-weight-bold white--text text-body-3">TOP SERVICES SEARCH</span>
             </div>
             <div v-if="swipable" class="pa-3 pb-4">
-                <Swipable :links="services" initially-open class="pb-1" />
+                <Swipable :links="links" initially-open class="pb-1" />
             </div>
             <div v-else class="home-services-body pa-3">
-                <NuxtLink v-for="(item, idx) in services" :key="idx" :to="item.url"
+                <NuxtLink v-for="(item, idx) in links" :key="idx" :to="item.url"
                     class="d-flex flex-column align-center">
                     <Icon :icon="item.icon" />
                     <div class="text-body-4">{{ item.title }}</div>
@@ -25,11 +25,12 @@ export default {
         swipable: {
             type: Boolean,
             default: false
-        }
+        },
+        items: Array
     },
     data() {
         return {
-            services: [
+            links: this.items || [
                 {
                     title: "Moving",
                     icon: "wheel",
@@ -68,7 +69,7 @@ export default {
                 {
                     title: "Cleaner",
                     icon: "clean",
-                    url: "#"
+                    url: "/services/cleaner"
                 },
                 {
                     title: "Plumbers",

@@ -19,12 +19,14 @@ export default {
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    { rel: 'stylesheet', href: 'https://unpkg.com/flickity@2/dist/flickity.min.css' },
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     { rel: 'preconnect', crossorigin: true, href: 'https://fonts.gstatic.com' },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@100..900&display=swap' },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap' }
     ],
     script: [
+      { src: "https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", defer: true, },
       { src: "https://cdn.jsdelivr.net/npm/country-list-with-dial-code-and-flag@5.1.0/dist/main.min.js", defer: true, },
       { src: "https://cdn.jsdelivr.net/npm/country-list-with-dial-code-and-flag/dist/country-flag-svg.js", defer: true, }
     ]

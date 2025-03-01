@@ -6,11 +6,12 @@
   --stroke-grey-1: 1px solid var(--stroke-color-1);
 
   --color-teal-1: #00B582;
-  --color-teal-2: #008F8A;
+  --color-teal-2: #00B5B0;
+  --color-teal-3: #008F8A;
 
   --color-text-secondary-2: #6B6F89;
 
-  --gradient-teal: linear-gradient(180deg, var(--color-teal-1), var(--color-teal-2))
+  --gradient-teal: linear-gradient(180deg, var(--color-teal-1), var(--color-teal-3))
 }
 
 .theme--light.v-application {

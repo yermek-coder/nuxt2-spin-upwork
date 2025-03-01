@@ -14,7 +14,7 @@
             </v-card>
         </v-container>
 
-        <v-sheet class="agents-agent-bottom-sheet elevation-10">
+        <v-sheet class="bottom-sheet elevation-10">
             <v-container class="pt-4">
                 <div class="d-flex flex-column mb-1">
                     <div class="agents-item d-flex gap-4 justify-space-between">

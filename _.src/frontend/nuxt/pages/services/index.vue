@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import servicesManager from '@/services/services'
+
 export default {
     layout: "home",
     route: {
@@ -39,14 +41,7 @@ export default {
                     isPromo: true,
                     src: "/banner-promo.jpg"
                 },
-                ...Array(3).fill({
-                    title: "Variety Home and Office Cleaning Service",
-                    location: "Bandar Meru Raya, Ipoh, Perak",
-                    review: "5.0 (1230)",
-                    price: "90/hr ",
-                    agency: "ABC Cleaner Agency Sdn Bhd",
-                    img: '/service-preview.jpg'
-                })
+                ...servicesManager.getAll().slice(0, 3)
             ]
         }
     }

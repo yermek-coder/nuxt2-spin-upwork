@@ -4,6 +4,7 @@
             <v-icon color="black">mdi-chevron-left</v-icon>
         </v-btn>
         <h4 class="text-uppercase">{{ page.component.route.title || page.name }}</h4>
+        <slot />
     </div>
 </template>
 

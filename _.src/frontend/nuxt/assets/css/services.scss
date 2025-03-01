@@ -1,0 +1,21 @@
+.services-id .carousel-cell {
+    width: 100%;
+}
+
+.services-id .carousel .dot.is-selected {
+    background-color: var(--color-teal-2);
+    width: 1rem;
+    border-radius: 0.5rem;
+}
+
+.services-id .carousel .dot {
+    margin-inline: 0.25rem;
+}
+
+.services-create-price-field .v-input__prepend-inner {
+    margin-top: 1.2rem !important;
+}
+
+.services-create-price-field .v-input__append-inner {
+    margin-top: 0.75rem !important;
+}

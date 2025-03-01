@@ -67,6 +67,7 @@
 <script>
 import agentService from '~/services/agent';
 import propertyServices from "~/services/property"
+import shareService from '~/services/share';
 
 export default {
     data() {
@@ -95,15 +96,11 @@ export default {
     },
     methods: {
         share() {
-            if (navigator?.share) {
-                navigator.share({
-                    title: this.agent.name + " " + this.agent.surname,
-                    text: this.agent.about,
-                    url: window.location.href,
-                })
-            } else {
-                this.$modal({ component: "ShareDialog", props: { link: window.location.href }, width: 343 })
-            }
+            shareService.showShareDialog({
+                title: this.agent.name + " " + this.agent.surname,
+                text: this.agent.about,
+                url: window.location.href,
+            })
         }
     }
 }
