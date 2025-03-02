@@ -1,3 +1,5 @@
+import { isString } from "underscore";
+
 export default function (_, inject) {
     const styles = {
         default: new Intl.NumberFormat("ms-MY", {
@@ -25,5 +27,13 @@ export default function (_, inject) {
 
     inject("date", function (date, size = "default") {
         return date ? new Date(date).toLocaleString('en-EN', SIZES[size]) : "";
+    })
+
+    inject("time", function (date, options = { timeStyle: "short" }) {
+        if (date && isString(date) && date.length === 5) {
+            date = new Date().toISOString().substring(0, 10) + "T" + date + ":00.000Z";
+        }
+
+        return date ? new Date(date).toLocaleTimeString("en-EN", { ...options }) : "";
     })
 }

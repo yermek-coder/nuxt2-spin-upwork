@@ -1,0 +1,29 @@
+.knowledge .carousel-cell-img {
+    position: relative;
+}
+
+.knowledge .carousel-cell-img-gradient {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 206px;
+    background: linear-gradient(to top, rgba(18, 18, 18, 0.8) 0%, rgba(18, 18, 18, 0.6) 75%, rgba(0, 0, 0, 0) 100%);
+}
+
+.knowledge .carousel-cell-img-body {
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.theme--light.v-application {
+
+    .article-card,
+    .video-card {
+        outline: #E6E6E6 solid 1px !important;
+    }
+}

@@ -149,7 +149,7 @@ export default {
     },
     data() {
         return {
-            categories: ["Gardener"],
+            categories: ["Gardener", "Other"],
             form: {
                 category: "Gardener",
                 subCategory: "Gardener",

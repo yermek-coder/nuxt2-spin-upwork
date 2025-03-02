@@ -1,0 +1,13 @@
+.carousel-cell {
+    width: 100%;
+}
+
+.carousel .dot.is-selected {
+    background-color: var(--color-teal-2);
+    width: 1rem;
+    border-radius: 0.5rem;
+}
+
+.carousel .dot {
+    margin-inline: 0.25rem;
+}

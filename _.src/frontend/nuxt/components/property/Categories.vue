@@ -1,6 +1,6 @@
 <template>
     <v-chip-group v-model="model" mandatory class="mb-3">
-        <v-chip v-for="(category, index) in categories" :key="index" active-class="teal--text text-lighten-2">
+        <v-chip v-for="(category, index) in categories" :key="index" active-class="teal--text text--lighten-2">
             {{ category.title }}
         </v-chip>
     </v-chip-group>

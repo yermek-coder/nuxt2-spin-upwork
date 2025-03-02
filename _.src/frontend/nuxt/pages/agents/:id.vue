@@ -1,11 +1,11 @@
 <template>
     <div class="agents-agent">
         <v-container class="pb-0 mb-3 white">
-            <div class="d-flex align-center justify-space-between gap-3 py-4">
+            <div class="d-flex align-center justify-space-between gap-3 py-4 agents-agent-header">
                 <v-btn to="/agents" icon small>
                     <v-icon color="black">mdi-chevron-left</v-icon>
                 </v-btn>
-                <div class="text-h7 font-weight-medium">Agent</div>
+                <div class="text-h7 font-weight-medium agents-agent-header-title">Agent</div>
                 <div class="d-flex align-center gap-2 black--text">
                     <v-btn icon>
                         <v-icon>mdi-heart-outline</v-icon>
@@ -25,7 +25,7 @@
 
         <v-container class="mb-4">
             <div class="d-flex flex-column align-center">
-                <div class="text-h6 mb-2">{{ agent.name }}</div>
+                <div class="text-h6 mb-2">{{ agent.name + " " + agent.surname }}</div>
                 <div class="d-flex gap-1">
                     <v-chip v-for="tag in agent.tags" :key="tag" small outlined>{{ tag }}</v-chip>
                 </div>
@@ -33,17 +33,15 @@
         </v-container>
 
         <v-container>
-            <div class="d-flex gap-4 align-center justify-space-between">
+            <div class="agents-agent-info">
                 <div class="d-flex gap-1 flex-column align-center">
                     <span class="text-h6">{{ agent.experienceYears }}</span>
                     <span>Experiences</span>
                 </div>
-                <v-divider vertical></v-divider>
                 <div class="d-flex gap-1 flex-column align-center">
                     <span class="text-h6">{{ agent.forSale }}</span>
                     <span>For Sale</span>
                 </div>
-                <v-divider vertical></v-divider>
                 <div class="d-flex gap-1 flex-column align-center">
                     <span class="text-h6">{{ agent.forRent }}</span>
                     <span>For Rent</span>
@@ -52,15 +50,45 @@
         </v-container>
 
         <v-container>
-            <div class="d-flex gap-3">
-                <v-chip v-for="item in tabs" :key="item.path" :to="{ name: item.name }" exact-active-class="teal--text"
-                    class="flex-grow-1 justify-center">
+            <div class="d-flex gap-3 chip-tab-navigation">
+                <v-chip v-for="item in tabs" :key="item.path" :to="{ name: item.name }"
+                    exact-active-class="v-chip--exact-active teal--text" class="flex-grow-1 justify-center">
                     {{ item.title }}
                 </v-chip>
             </div>
         </v-container>
 
         <NuxtChild v-bind="{ agent, listingCategoriesActive, listingCategories, properties }" />
+
+        <v-sheet class="bottom-sheet elevation-10">
+            <v-container class="pt-4">
+                <div class="d-flex flex-column mb-1">
+                    <div class="agents-item d-flex gap-4 justify-space-between">
+                        <v-avatar><img :src="agent.avatar" alt="Avatar"></v-avatar>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-center gap-2">
+                                <span>{{ agent.name + " " + agent.surname }}</span>
+                                <v-icon class="teal--text" small>mdi-check-circle</v-icon>
+                            </div>
+                            <div class="caption">{{ agent.address }}</div>
+                            <div class="caption">{{ agent.license }}</div>
+                        </div>
+                        <v-btn fab class="elevation-0" small>
+                            <Icon icon="chat" />
+                        </v-btn>
+                        <v-btn fab class="elevation-0 green white--text" small>
+                            <v-icon>mdi-whatsapp</v-icon>
+                        </v-btn>
+                    </div>
+                </div>
+
+                <p class="text-body-4 text--secondary mb-0">I confirm that I have read the <span
+                        class="teal--text">privacy
+                        policy</span>
+                    and allow my
+                    information to be shared with this agent who may contact me later.</p>
+            </v-container>
+        </v-sheet>
     </div>
 </template>
 

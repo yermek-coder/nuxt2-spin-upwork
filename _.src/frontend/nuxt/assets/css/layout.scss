@@ -13,3 +13,11 @@
 .default-layout {
     padding-bottom: 5rem;
 }
+
+.chip-tab-navigation .v-chip--active:not(.v-chip--exact-active) {
+    background-color: #F4F4F7;
+
+    &::before {
+        background-color: inherit;
+    }
+}

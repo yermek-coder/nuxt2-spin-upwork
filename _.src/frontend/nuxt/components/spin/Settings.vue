@@ -134,7 +134,6 @@ export default {
                 winnerColor: this.winnerColor
             }
 
-            console.log('Wheel Settings:', settings);
             navigator.clipboard.writeText(JSON.stringify(settings, undefined, 2))
         },
     },

@@ -51,7 +51,7 @@
             <div class="text-h6 mb-3">Recommend Properties</div>
 
             <v-chip-group v-model="activePropertyCategory" mandatory class="mb-3">
-                <v-chip v-for="(category, index) in categories" :key="index" active-class="teal--text text-lighten-2">
+                <v-chip v-for="(category, index) in categories" :key="index" active-class="teal--text text--lighten-2">
                     {{ category.title }}
                 </v-chip>
             </v-chip-group>

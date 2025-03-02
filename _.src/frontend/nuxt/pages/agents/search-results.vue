@@ -11,7 +11,7 @@
         <v-container>
             <v-chip-group>
                 <v-chip @click="openFilter" v-for="(feature, index) in features" :key="index"
-                    active-class="teal--text text-lighten-2" :class="{ 'teal--text': afterSearch }" outlined>
+                    active-class="teal--text text--lighten-2" :class="{ 'teal--text': afterSearch }" outlined>
                     {{ afterSearch ? feature.activeTitle : feature.title }}
                     <v-icon>mdi-chevron-down</v-icon>
                 </v-chip>

@@ -138,7 +138,6 @@ export default {
     },
     methods: {
         submit() {
-            console.log("Saved Configuration:", this.config);
             navigator.clipboard.writeText(JSON.stringify(this.config, undefined, 2))
             // You can add logic here to save the configuration to a server or local storage.
         },

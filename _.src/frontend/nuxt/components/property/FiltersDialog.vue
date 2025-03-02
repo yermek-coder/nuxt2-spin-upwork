@@ -10,7 +10,7 @@
 
             <v-chip-group v-model="tab" mandatory class="mb-2">
                 <v-chip v-for="(tab, index) in tabs" :key="index" :value="tab.component"
-                    active-class="teal--text text-lighten-2">
+                    active-class="teal--text text--lighten-2">
                     {{ tab.title }}
                 </v-chip>
             </v-chip-group>

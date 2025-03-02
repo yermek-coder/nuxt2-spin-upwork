@@ -16,11 +16,11 @@
         </v-container>
 
         <v-container class="mb-3">
-            <div ref="carousel" class="carousel">
+            <Carousel>
                 <div v-for="(src, idx) in slides" :key="idx" class="carousel-cell">
-                    <img :data-flickity-lazyload="src" loading="lazy" class="rounded-xl"></img>
+                    <img :data-flickity-lazyload="src" class="rounded-xl"></img>
                 </div>
-            </div>
+            </Carousel>
         </v-container>
 
         <v-container>
@@ -43,7 +43,7 @@
             <div class="white rounded-xl pa-4">
                 <div class="d-flex justify-space-between mb-3">
                     <div class="text-h7 font-weight-medium mb-2">Reviews</div>
-                    <NuxtLink to="#" class="teal--text text-lighten-2">See More</NuxtLink>
+                    <NuxtLink to="#" class="teal--text text--lighten-2">See More</NuxtLink>
                 </div>
                 <div class="d-flex gap-3 flex-column">
                     <template v-for="(review, idx) in reviews">
@@ -134,8 +134,6 @@ export default {
     },
     data() {
         return {
-            checkCounter: 0,
-            flickity: null,
             faq: [
                 { title: 'What documents are required for buying house?', content: '' },
                 { title: 'What documents are required for buying house?', content: '' },
@@ -159,26 +157,7 @@ export default {
             return agentService.getAgent(this.service.agent)
         }
     },
-    mounted() {
-        this.init()
-    },
-    unmounted() {
-        this.flickity?.destroy?.()
-    },
     methods: {
-        init() {
-            this.checkCounter += 1;
-            if (window.Flickity) {
-                this.flickity = new window.Flickity(this.$refs.carousel, {
-                    wrapAround: true,
-                    lazyLoad: true,
-                    imagesLoaded: true,
-                    prevNextButtons: false
-                })
-            } else if (this.checkCounter < 10) {
-                setTimeout(this.init, 100)
-            }
-        },
         share() {
             shareService.showShareDialog({
                 title: this.agent.name + " " + this.agent.surname,

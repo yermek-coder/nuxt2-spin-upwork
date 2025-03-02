@@ -24,26 +24,6 @@
     }
 }
 
-.property-card-image {
-    position: relative;
-}
-
-.property-card-image-badge {
-    position: absolute;
-    z-index: 1;
-    top: 1rem;
-    left: -3px;
-
-    &-decor {
-        position: absolute;
-        height: 1px;
-        width: 2px;
-        left: 0;
-        top: -1px;
-        border-top-left-radius: 1px;
-    }
-}
-
 .property-card-button-vr {
     position: absolute;
     top: 50%;
@@ -135,7 +115,7 @@
 }
 
 .v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)>.v-input__control>.v-input__slot fieldset {
-    color: #EDEDF3 !important;
+    color: var(--stroke-color-1) !important;
 }
 
 .property-search input {

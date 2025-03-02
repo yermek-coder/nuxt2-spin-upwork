@@ -63,3 +63,23 @@
     /* Safari and Chrome */
   }
 }
+
+.position-relative {
+  position: relative;
+}
+
+.card-image-badge {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: -3px;
+
+  &-decor {
+    position: absolute;
+    height: 1px;
+    width: 2px;
+    left: 0;
+    top: -1px;
+    border-top-left-radius: 1px;
+  }
+}

@@ -1,3 +1,5 @@
+import propertyService from "@/services/property"
+
 class ServicesManager {
     getAll() {
         return Array(6).fill({
@@ -26,6 +28,22 @@ class ServicesManager {
             stars: 4,
             img: '/review-avatar.svg'
         })
+    }
+
+    getSupplier(id) {
+        return {
+            name: "Savannah",
+            surname: "Nguyen",
+            verified: true,
+            avatar: "/avatars/2.jpg",
+            agency: "ABC Cleaner Agency Sdn Bhd",
+            license: "Agency Reg. No. E (1) 0572",
+            experienceYears: "7 years",
+            servicesCount: 3,
+            about: "Hello dear vendors, purchasers & fellow investors, I am Visaghan Naidu from CBD Properties (Puchong) My area of focus would be in the Klang Valley and also Rawang which includes Kota Emerald, Bandar Country Homes, Saujana Rawang, and M-Residence. Feel free to contact me if you require any real estate related assistance and it would be my pleasure to provide you the best service  Cheers!",
+            listing: propertyService.getProperties(),
+            whatsapp: "+624525552424"
+        }
     }
 }
 

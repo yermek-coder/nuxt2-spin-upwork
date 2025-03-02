@@ -78,6 +78,9 @@ export default {
           // primary: process.env.PRIMARY_COLOR,
           // secondary: process.env.SECONDARY_COLOR,
         },
+        dark: {
+
+        }
       },
     },
     treeShake: true,
