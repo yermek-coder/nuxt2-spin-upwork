@@ -1,0 +1,40 @@
+.rte .pell-actionbar {
+    border-top: 1px solid var(--color-grey-1);
+    border-bottom: 1px solid var(--color-grey-1);
+    padding-block: 1rem;
+
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pell-content {
+    outline: none !important;
+    overflow-y: auto;
+    padding: 0.75rem;
+}
+
+.pell-content:empty::before {
+    content: attr(placeholder);
+    color: var(--bs-gray);
+    pointer-events: none;
+}
+
+.pell-content p:last-child {
+    margin-bottom: 0;
+}
+
+.pell-content {
+
+    h1,
+    h2,
+    h3 {
+        margin-block: 0.5rem;
+    }
+}
+
+.pell-content img {
+    display: block;
+    max-width: 100%;
+}

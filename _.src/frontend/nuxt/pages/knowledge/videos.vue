@@ -1,6 +1,6 @@
 <template>
     <v-container class="knowledge-articles">
-        <div class="d-flex justify-space-between">
+        <div class="d-flex justify-space-between mb-3">
             <div class="text-h6">Videos</div>
             <NuxtLink to="#">View all</NuxtLink>
         </div>

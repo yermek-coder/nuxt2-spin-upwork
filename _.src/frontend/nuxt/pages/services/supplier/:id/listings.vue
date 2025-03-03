@@ -4,7 +4,7 @@
             <v-card class="white pa-4 rounded-xl elevation-0 mb-16">
                 <div class="text-h7 font-weight-medium mb-2">Active Listing</div>
                 <v-chip-group :value="listingCategoriesActive" @input="$emit('input:listingCategoriesActive', $event)"
-                    mandatory>
+                    mandatory class="mb-3">
                     <v-chip v-for="item in listingCategories" :key="item" :value="item" active-class="teal--text"
                         class="flex-grow-1 justify-center">{{ item }}</v-chip>
                 </v-chip-group>

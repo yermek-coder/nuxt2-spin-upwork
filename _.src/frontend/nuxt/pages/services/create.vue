@@ -11,31 +11,20 @@
                 <div class="text-h7 font-weight-medium mb-2">Service Catergory</div>
                 <div>
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Category</div>
-                    <v-select v-model="form.category" :items="categories" hide-details outlined color="teal lighten-1"
+                    <v-select v-model="form.category" :items="categories" hide-details outlined color="primary"
                         class="rounded-xl" />
                 </div>
                 <div>
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Sub Category</div>
-                    <v-select v-model="form.subCategory" :items="categories" hide-details outlined
-                        color="teal lighten-1" class="rounded-xl" />
+                    <v-select v-model="form.subCategory" :items="categories" hide-details outlined color="primary"
+                        class="rounded-xl" />
                 </div>
             </div>
         </v-container>
         <v-container>
             <div class="white rounded-xl pa-4 d-flex flex-column gap-3">
                 <div class="text-h7 font-weight-medium mb-2">Thumbnail</div>
-                <v-card outlined class="rounded-xl d-flex gap-3 py-12 align-center justify-center form-upload">
-                    <Icon icon="image" />
-                    <div class="d-flex gap-1 flex-column justify-center">
-                        <div class="text-body-2">
-                            <span class="teal--text">Upload</span> your document
-                        </div>
-                        <div class="text--secondary text-body-3">
-                            Maximum size 5MB
-                        </div>
-                    </div>
-                    <input ref="thumbnailInput" @cancel.stop @change="addThumbnail" :accept="imageTypes" type="file" />
-                </v-card>
+                <UploadArea @change="addThumbnail" :types="imageTypes" />
             </div>
         </v-container>
         <v-container>
@@ -87,16 +76,16 @@
                 <div class="text-h7 font-weight-medium mb-2">Details</div>
                 <div>
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Company Name</div>
-                    <v-text-field v-model="form.name" hide-details outlined color="teal lighten-1" class="rounded-xl" />
+                    <v-text-field v-model="form.name" hide-details outlined color="primary" class="rounded-xl" />
                 </div>
                 <div>
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Company Register Number</div>
-                    <v-text-field v-model="form.registerNumber" hide-details outlined color="teal lighten-1"
+                    <v-text-field v-model="form.registerNumber" hide-details outlined color="primary"
                         class="rounded-xl" />
                 </div>
                 <div>
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Price</div>
-                    <v-text-field v-model="form.price" type="number" hide-details outlined color="teal lighten-1"
+                    <v-text-field v-model="form.price" type="number" hide-details outlined color="primary"
                         class="rounded-xl services-create-price-field">
                         <template #prepend-inner>
                             <div class="d-flex gap-2 align-center ms-1 black--text">
@@ -118,7 +107,7 @@
                 </div>
                 <div>
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Descriptions</div>
-                    <v-textarea v-model="form.descriptions" hide-details outlined rows="3" color="teal lighten-1"
+                    <v-textarea v-model="form.descriptions" hide-details outlined rows="3" color="primary"
                         class="rounded-xl" />
                 </div>
                 <div>
@@ -132,9 +121,9 @@
             </div>
         </v-container>
 
-        <v-sheet class="bottom-sheet elevation-10">
-            <v-container class="d-flex">
-                <v-btn class="elevation-0 flex-grow-1 teal lighten-2 white--text" x-large><v-icon>mdi-plus</v-icon>
+        <v-sheet class="bottom-sheet elevation-0" outlined>
+            <v-container class="d-flex py-2">
+                <v-btn color="primary" class="elevation-0 flex-grow-1 white--text" x-large><v-icon>mdi-plus</v-icon>
                     <div class="ms-4">Create</div>
                 </v-btn>
             </v-container>
@@ -143,6 +132,8 @@
 </template>
 
 <script>
+import { IMAGE_TYPES } from '~/util'
+
 export default {
     route: {
         title: "New Service",
@@ -163,7 +154,7 @@ export default {
                 thumbnail: null,
                 gallery: [],
             },
-            imageTypes: ["image/bmp", "image/jpeg", "image/png", "image/webp"],
+            imageTypes: IMAGE_TYPES,
             previews: []
         }
     },

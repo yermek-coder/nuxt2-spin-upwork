@@ -1,10 +1,10 @@
 <template>
     <v-container class="knowledge-explore">
-        <div class="overflow-auto d-flex gap-4 hide-scrollbar">
+        <div class="overflow-auto d-flex gap-4 hide-scrollbar mb-6">
             <ArticleCard v-for="(article, idx) in articles" :key="idx" :article="article" />
         </div>
 
-        <div class="d-flex justify-space-between">
+        <div class="d-flex justify-space-between mb-3">
             <div class="text-h6">Videos</div>
             <NuxtLink to="#">View all</NuxtLink>
         </div>

@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         chipClass(item) {
-            return (this.form?.preferences || []).includes(item) && "teal--text teal lighten-3"
+            return (this.form?.preferences || []).includes(item) && "primary--text primary"
         },
         setLocation(item) {
             if (Array.isArray(this.form?.preferences)) {

@@ -5,3 +5,17 @@
 
 $slider-track-width: 0.5rem;
 $btn-text-transform: capitalize;
+
+$grey-base: #9E9E9E;
+$grey: (
+    'base': $grey-base,
+    'lighten-5': #FAFAFA,
+    'lighten-4': #F5F5F5,
+    'lighten-3': #EEEEEE,
+    'lighten-2': #E0E0E0,
+    'lighten-1': #BDBDBD,
+    'darken-1': #757575,
+    'darken-2': #616161,
+    'darken-3': #2E2E2E,
+    'darken-4': #212121
+);

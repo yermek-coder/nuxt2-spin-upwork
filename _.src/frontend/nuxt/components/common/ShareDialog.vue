@@ -13,7 +13,7 @@
             <v-btn icon><v-icon>mdi-content-copy</v-icon></v-btn>
         </v-sheet>
         <div class="d-flex px-4">
-            <v-btn color="teal lighten-1" x-large class="white--text elevation-0 flex-grow-1">Share Now</v-btn>
+            <v-btn color="primary" x-large class="white--text elevation-0 flex-grow-1">Share Now</v-btn>
         </div>
     </v-card>
 </template>

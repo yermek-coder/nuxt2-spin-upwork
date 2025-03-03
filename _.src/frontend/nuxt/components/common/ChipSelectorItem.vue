@@ -1,5 +1,5 @@
 <template>
-    <v-chip @click="setValue(value)" :class="{ 'teal lighten-5': model[property] === value }">
+    <v-chip @click="setValue(value)" :class="{ 'teal lighten-4 teal--text': model[property] === value }">
         <slot />
     </v-chip>
 </template>

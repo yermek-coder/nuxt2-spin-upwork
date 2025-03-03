@@ -6,9 +6,9 @@
         </v-img>
 
         <div class="px-2 pb-2">
-            <ServiceRating :service="service" />
+            <ServiceRating :service="service" class="mb-1" />
             <div class="subtitle-2">{{ service.title }}</div>
-            <ServicePrice :service="service" />
+            <ServicePrice :service="service" class="mb-1" />
             <div class="text-body-5 text--secondary-2">{{ service.agency }}</div>
         </div>
     </v-card>

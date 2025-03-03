@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         chipClass(item) {
-            return (this.form?.locations || []).includes(item) && "teal--text teal lighten-3"
+            return (this.form?.locations || []).includes(item) && "primary--text primary"
         },
         setLocation(item) {
             if (Array.isArray(this.form?.locations)) {

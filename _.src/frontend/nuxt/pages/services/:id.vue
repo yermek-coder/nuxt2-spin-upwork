@@ -1,9 +1,7 @@
 <template>
     <div class="services-id pb-12">
         <v-container class="pb-0 mb-3 white">
-            <div class="d-flex align-center justify-space-between gap-3 py-4">
-                <Breadcrumbs />
-
+            <Breadcrumbs>
                 <div class="d-flex align-center gap-2 black--text">
                     <v-btn icon>
                         <v-icon>mdi-star-outline</v-icon>
@@ -12,19 +10,17 @@
                         <v-icon>mdi-export-variant</v-icon>
                     </v-btn>
                 </div>
-            </div>
+            </Breadcrumbs>
         </v-container>
 
-        <v-container class="mb-3">
-            <Carousel>
-                <div v-for="(src, idx) in slides" :key="idx" class="carousel-cell">
-                    <img :data-flickity-lazyload="src" class="rounded-xl"></img>
-                </div>
-            </Carousel>
-        </v-container>
+        <Carousel height="303">
+            <v-carousel-item v-for="(src, i) in slides" :key="i" class="px-3">
+                <v-img :src="src" class="rounded-xl" height="303"></v-img>
+            </v-carousel-item>
+        </Carousel>
 
         <v-container>
-            <div class="text-h5 font-weight-medium">{{ service.title }}</div>
+            <div class="text-h5 font-weight-medium pb-2">{{ service.title }}</div>
             <div class="text--secondary text-body-2">{{ service.agency }}</div>
             <div class="d-flex justify-space-between align-center">
                 <ServicePrice :service="service" />
@@ -87,13 +83,14 @@
                 </v-expansion-panels>
 
                 <div class="d-flex">
-                    <v-btn x-large class="teal lighten-5 elevation-0 teal--text flex-grow-1">I have Questions</v-btn>
+                    <v-btn x-large color="teal lighten-4" class="elevation-0 teal--text flex-grow-1">I have
+                        Questions</v-btn>
                 </div>
             </div>
         </v-container>
 
-        <v-sheet class="bottom-sheet elevation-10">
-            <v-container class="pt-4">
+        <v-sheet class="bottom-sheet elevation-10" outlined>
+            <v-container class="pt-4 pb-2">
                 <div class="d-flex flex-column mb-1">
                     <div class="agents-item d-flex gap-4 justify-space-between">
                         <v-avatar><img :src="agent.avatar" alt="Avatar"></v-avatar>

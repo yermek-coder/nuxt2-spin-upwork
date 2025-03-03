@@ -1,12 +1,7 @@
 <template>
     <div class="credit-my-rewards">
         <v-container class="pb-0 mb-3 white">
-            <div class="d-flex align-center gap-3 py-4">
-                <v-btn @click="$router.push('/credit')" icon small>
-                    <v-icon color="black">mdi-chevron-left</v-icon>
-                </v-btn>
-                <h4 class="text-uppercase">My rewards</h4>
-            </div>
+            <Breadcrumbs title="My rewards" />
         </v-container>
 
         <v-container>
@@ -60,7 +55,7 @@ export default {
         },
         pillClass(item) {
             if (item.name === this.$route.name) {
-                return "teal lighten-1 white--text"
+                return "primary white--text"
             } else {
                 return "grey--text grey lighten-3"
             }

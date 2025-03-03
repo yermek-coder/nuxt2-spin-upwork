@@ -10,7 +10,7 @@
 
         <v-container class="mb-3">
             <v-text-field v-model="filters.q" placeholder="Search here" outlined clearable hide-details
-                clear-icon="mdi-close-circle" color="teal lighten-1" class="rounded-xl property-search mb-3">
+                clear-icon="mdi-close-circle" color="primary" class="rounded-xl property-search mb-3">
                 <template #prepend-inner>
                     <v-icon>mdi-magnify</v-icon>
                 </template>
@@ -29,7 +29,7 @@
                 <v-card v-for="service in services" :key="service.id" outlined class="rounded-xl">
                     <v-img :src="service.listingCover" class="rounded-xl ma-1 align-end"
                         gradient="180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,1) 100%" height="130">
-                        <div class="text-body-4 white--text pa-2">{{ service.location }}</div>
+                        <div class="text-body-4 white--text pa-3">{{ service.location }}</div>
                     </v-img>
 
                     <div class="px-2 pb-2">
@@ -44,11 +44,11 @@
                     <v-divider></v-divider>
 
                     <div class="d-flex align-center px-3 py-2">
-                        <div class="text-body-2 flex-grow-1">
+                        <div class="text-body-3 flex-grow-1 text--secondary">
                             <span>Last Update:</span>
                             <span>{{ $date(service.updated, 'date_month_full') }}</span>
                         </div>
-                        <v-btn small class="elevation-0 teal lighten-2 white--text">Published</v-btn>
+                        <v-btn x-small color="primary" class="elevation-0 white--text">Published</v-btn>
                     </div>
 
                     <v-divider class="mb-1"></v-divider>
@@ -57,22 +57,22 @@
                         <v-row dense>
                             <v-col cols="6">
                                 <div class="d-flex">
-                                    <v-btn outlined class="flex-grow-1 rounded-lg" color="teal">edit</v-btn>
+                                    <v-btn outlined class="flex-grow-1 rounded-lg" color="primary">edit</v-btn>
                                 </div>
                             </v-col>
                             <v-col cols="6">
                                 <div class="d-flex">
-                                    <v-btn outlined class="flex-grow-1 rounded-lg" color="teal">view</v-btn>
+                                    <v-btn outlined class="flex-grow-1 rounded-lg" color="primary">view</v-btn>
                                 </div>
                             </v-col>
                             <v-col cols="6">
                                 <div class="d-flex">
-                                    <v-btn outlined class="flex-grow-1 rounded-lg" color="teal">delete</v-btn>
+                                    <v-btn outlined class="flex-grow-1 rounded-lg" color="primary">delete</v-btn>
                                 </div>
                             </v-col>
                             <v-col cols="6">
                                 <div class="d-flex">
-                                    <v-btn outlined class="flex-grow-1 rounded-lg" color="teal">hide</v-btn>
+                                    <v-btn outlined class="flex-grow-1 rounded-lg" color="primary">hide</v-btn>
                                 </div>
                             </v-col>
                         </v-row>
@@ -81,9 +81,10 @@
             </div>
         </v-container>
 
-        <v-sheet class="bottom-sheet elevation-10">
-            <v-container class="d-flex">
-                <v-btn class="elevation-0 flex-grow-1 teal lighten-2 white--text" x-large><v-icon>mdi-plus</v-icon>
+        <v-sheet class="bottom-sheet elevation-0" outlined>
+            <v-container class="d-flex py-2">
+                <v-btn to="/services/create" color="primary" class="elevation-0 flex-grow-1 white--text"
+                    x-large><v-icon>mdi-plus</v-icon>
                     <div class="ms-4">New Service</div>
                 </v-btn>
             </v-container>

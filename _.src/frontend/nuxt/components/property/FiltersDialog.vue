@@ -19,7 +19,7 @@
 
             <div class="d-flex gap-2">
                 <v-btn @click="reset" text x-large elevation="0">reset</v-btn>
-                <v-btn @click="$emit('close', 'result')" color="teal lighten-1" x-large class="white--text flex-grow-1"
+                <v-btn @click="$emit('close', 'result')" color="primary" x-large class="white--text flex-grow-1"
                     elevation="0">confirm</v-btn>
             </div>
         </v-container>

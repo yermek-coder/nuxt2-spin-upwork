@@ -12,11 +12,11 @@
     "lintfix": "prettier --write --list-different ."
   },
   "dependencies": {
-    "@tinymce/tinymce-vue": "^3.2.8",
     "canvas-confetti": "^1.9.3",
     "core-js": "^3.25.3",
     "lodash.camelcase": "^4.3.0",
     "nuxt": "^2.15.8",
+    "pell": "^1.0.6",
     "underscore": "^1.13.7",
     "vlitejs": "^7.0.0",
     "vue": "^2.7.10",

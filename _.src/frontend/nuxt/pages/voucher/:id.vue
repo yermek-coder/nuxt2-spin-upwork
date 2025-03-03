@@ -5,8 +5,9 @@
                 <v-btn @click="$router.go(-1)" icon small>
                     <v-icon color="black">mdi-chevron-left</v-icon>
                 </v-btn>
-                <h4 class="text-uppercase">Voucher</h4>
+                <h4 class="text-uppercase"></h4>
             </div>
+            <Breadcrumbs title="Voucher" />
         </v-container>
 
         <v-container v-if="voucher">
@@ -23,7 +24,7 @@
         </v-container>
 
         <v-container class="d-flex voucher-page-bottom-button">
-            <v-btn @click="reward" x-large class="elevation-0 teal lighten-1 white--text flex-grow-1">Redeem +100
+            <v-btn @click="reward" color="primary" x-large class="elevation-0 white--text flex-grow-1">Redeem +100
                 points</v-btn>
         </v-container>
     </div>

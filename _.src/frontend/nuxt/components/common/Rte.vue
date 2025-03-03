@@ -1,156 +1,154 @@
 <template>
-    <!-- <div :class="['full-rte-' + view, style?.rte]" @click="onClick" class="full-rte">
-        <div v-if="!toolbarContainer && !style?.disabled" class="toolbar" :class="style?.toolbar" :id="editorId"></div>
-        <Editor :disabled="style?.disabled" @blur="onBlur" v-model="content" :tinymceScriptSrc :init="options"
-            class="editor" :class="style?.editor" />
-    </div> -->
-    <Editor :tinymceScriptSrc="tinymceScriptSrc" :init="{
-        plugins: 'lists link image table code help wordcount'
-    }" />
+    <div :class="{ focus: focussed }" class="rte" />
 </template>
 
 <script>
-import Editor from '@tinymce/tinymce-vue'
+import pell from "pell/dist/pell";
+
+const RTE_LINE_BLOCK = 'p';
+
+const BUTTONS_DEFAULT = ["undo", "redo", "bold", "italic", "underline", "paragraph", "heading1", "heading2", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "ulist", "olist", "indent", "unindent"];
+
+const exec = pell.exec;
+const queryCommandState = command => document.queryCommandState(command);
 
 export default {
-    components: { Editor },
+    name: "Rte",
+    props: ["value", "buttons", "options", "autofocus"],
     data() {
-        return {
-            tinymceScriptSrc: "https://cheerful-twilight-91c4c1.netlify.app/js/tinymce/tinymce.min.js",
-        }
-    }
-}
-</script>
-
-<!-- <script>
-// @ts-check
-import { ref, watch, computed, inject } from "vue";
-
-const $i18n = inject("$i18n");
-
-// Init emits and props
-const emit = defineEmits(["update:modelValue", "focus", "blur"]);
-const props = defineProps({
-    modelValue: String,
-    buttons: String,
-    view: { type: String, default: "adaptive" },
-    placeholder: String,
-    toolbarContainer: String,
-    toolbarPersist: { type: Boolean, default: true }
-});
-
-// Constants
-const tinymceScriptSrc = "https://smartchat-tinymce.netlify.app/6.8.2/js/tinymce/tinymce.min.js";
-
-// Styles
-const styles = {
-    adaptive: {
-        editor: "form-control",
-        toolbar: "form-control"
+        return { focussed: false, plugins: null, editor: null };
     },
-    fill: {
-        rte: "pane",
-        toolbar: "pane-item",
-        editor: "pane-body"
-    },
-    stretch: {
-        editor: "form-control",
-        toolbar: "form-control"
-    },
-    inlinestretch: {
-        toolbar: "form-control"
-    },
-    readonly: {
-        editor: "form-control",
-        toolbar: "form-control",
-        disabled: true
-    }
-};
+    mounted() {
+        // Init actions
+        const actions = {
+            undo: { title: "Undo", icon: '<i class="v-icon mdi mdi-arrow-u-left-top"></i>', result: () => exec("undo") },
+            redo: { title: "Redo", icon: '<i class="v-icon mdi mdi-arrow-u-right-top"></i>', result: () => exec("redo") },
+            bold: { title: "Bold", icon: '<i class="v-icon mdi mdi-format-bold"></i>', state: () => queryCommandState("bold"), result: () => exec("bold") },
+            italic: { title: "Italic", icon: '<i class="v-icon mdi mdi-format-italic"></i>', state: () => queryCommandState("italic"), result: () => exec("italic") },
+            strikeThrough: { title: "Strike-through", icon: '<i class="v-icon mdi mdi-format-strikethrough-variant"></i>', state: () => queryCommandState("strikeThrough"), result: () => exec("strikeThrough") },
+            underline: { title: "Underline", icon: '<i class="v-icon mdi mdi-format-underline"></i>', state: () => queryCommandState("underline"), result: () => exec("underline") },
+            heading1: { icon: '<i class="v-icon mdi mdi-format-header-1"></i>', title: "Heading 1", result: () => exec("formatBlock", "<h1>") },
+            heading2: { icon: '<i class="v-icon mdi mdi-format-header-2"></i>', title: "Heading 2", result: () => exec("formatBlock", "<h2>") },
+            paragraph: { icon: '<i class="v-icon mdi mdi-format-paragraph"></i>', title: "Paragraph", result: () => exec("formatBlock", `<${RTE_LINE_BLOCK}>`) },
+            quote: { icon: '<i class="v-icon mdi mdi-format-quote-close"></i>', title: "Quote", result: () => exec("formatBlock", "<blockquote>") },
+            olist: { icon: '<i class="v-icon mdi mdi-format-list-numbered"></i>', title: "Ordered List", result: () => exec("insertOrderedList") },
+            ulist: { icon: '<i class="v-icon mdi mdi-format-list-bulleted"></i>', title: "Unordered List", result: () => exec("insertUnorderedList") },
+            code: { icon: '<i class="v-icon mdi mdi-code-tags"></i>', title: "Code", result: () => exec("formatBlock", "<pre>") },
+            indent: { icon: '<i class="v-icon mdi mdi-format-indent-increase"></i>', title: "Indent", result: () => exec("indent", `<${RTE_LINE_BLOCK}>`) },
+            unindent: { icon: '<i class="v-icon mdi mdi-format-indent-decrease"></i>', title: "Unindent", result: () => exec("outdent") },
+            justifyLeft: { icon: '<i class="v-icon mdi mdi-format-align-left"></i>', title: "Align left", result: () => exec("justifyLeft") },
+            justifyCenter: { icon: '<i class="v-icon mdi mdi-format-align-center"></i>', title: "Align center", result: () => exec("justifyCenter") },
+            justifyRight: { icon: '<i class="v-icon mdi mdi-format-align-right"></i>', title: "Align right", result: () => exec("justifyRight") },
+            justifyFull: { icon: '<i class="v-icon mdi mdi-format-align-justify"></i>', title: "Align full", result: () => exec("justifyFull") },
+            removeFormat: { icon: '<i class="v-icon mdi mdi-eraser"></i>', title: "Clear formatting", result: () => exec("removeFormat") },
+        };
 
-const style = computed(() => styles[props.view]);
+        // Create editor
+        this.editor = pell.init({
+            element: this.$el,
+            actions: (this.buttons || BUTTONS_DEFAULT).map(key => ({ ...actions[key], result: () => actions[key].result.call(this, { editor: this.editor, exec, queryCommandState }) })),
+            defaultParagraphSeparator: RTE_LINE_BLOCK,
+            classes: {
+                button: "v-btn v-btn--icon v-size--small px-0",
+                actionbar: "pell-actionbar",
+                selected: "active"
+            },
+            onChange: this.onChanged
+        });
 
-// Init
-const editorId = `toolbar-${uuid()}`;
-const options = {
-    inline: true,
-    forced_root_block: RTE_LINE_BLOCK,
-    toolbar_persist: props.toolbarPersist,
-    fixed_toolbar_container: "#" + (props.toolbarContainer || editorId),
-    language: config.locale === "en" ? null : config.locale,
-    entity_encoding: "raw",
-    plugins: "code image link table pagebreak nonbreaking anchor lists",
-    toolbar: props.buttons || RTE_FULL_DEFAULT_BUTTONS,
-    style_formats: [
-        { title: `${$i18n("heading")} 1`, format: "h3" },
-        { title: `${$i18n("heading")} 2`, format: "h4" },
-        { title: `${$i18n("heading")} 3`, format: "h5" },
-        { title: "Paragraph", format: RTE_LINE_BLOCK },
-        { title: $i18n("blockquote"), format: "blockquote" },
-        { title: "Smaller", format: "h6" },
-        { title: "Very small", block: RTE_LINE_BLOCK, styles: { fontSize: "7pt" } }
-    ],
-    table_toolbar: "tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol",
-    placeholder: props.placeholder,
-    images_upload_handler: blobInfo => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const image = await imageService.uploadImage(blobInfo.blob());
-                const imageUrl = entityService.attachmentUrl(image, "image");
-                resolve(imageUrl);
-            } catch (error) {
-                reject($i18n("flash_uploading_errors"));
+        // Hack: Disable tab index for buttons
+        this.editor.querySelectorAll("button").forEach(el => (el.tabIndex = -1));
+
+        // Event listeners
+        this.editor.content.addEventListener("click", e => {
+            if (e.target?.nodeName == "A" && e.target.href && e.target.getAttribute("target") == "_blank") {
+                window.open(e.target.href);
             }
         });
-    },
-    image_caption: true,
-    statusbar: false,
-    menubar: false,
-    quickbars_selection_toolbar: "bold italic | quicklink h2 h3 blockquote quickimage quicktable",
-    skin: "oxide",
-    // content_css: "adaptive"
-};
 
-// Text Conversion: Incoming
-function convertIn(html) {
-    return imageService.renderImages(html);
-}
+        // Init
+        this.editor.content.innerHTML = this.value || "";
+        this.editor.content.setAttribute("placeholder", this.$attrs.placeholder || "");
 
-// Text Conversion: Outgoing
-function convertOut(html) {
-    return imageService.parseImages(cleanHtmlStyles(linksToHrefs(html || "")));
-}
+        // Handle blur
+        this.editor.content.addEventListener("blur", () => (this.blurTimeout = setTimeout(() => (this.focussed = false), 150)));
+        this.editor.content.addEventListener("blur", this.onBlur);
 
-const content = ref(convertIn(props.modelValue || ""));
+        // Handle focus
+        this.editor.content.addEventListener("focus", () => {
+            // If focussed when blurring is in progress, quit blurring
+            if (this.blurTimeout) {
+                clearTimeout(this.blurTimeout);
+                this.blurTimeout = null;
+            }
 
-// Commit changes
-function commit() {
-    if (content.value != props.modelValue) {
-        emit("update:modelValue", convertOut(content.value));
-    }
-}
+            this.focussed = true;
+        });
 
-// Handle link clicks
-function onClick(e) {
-    if (e.target?.closest("a") && e.target.href && e.target.getAttribute("target") === "_blank") {
-        window.open(e.target.href);
-    }
-}
+        // Handle paste of html
+        this.editor.content.addEventListener("paste", e => {
+            const files = e.clipboardData?.types?.includes("Files");
+            if (files && e.clipboardData.types.includes("text/html")) {
+                const item = e.clipboardData.items.find(ref => { ref.type === "text/html" });
+                if (item) {
+                    item.getAsString(str => exec("insertHTML", false, str));
+                }
+            }
 
-// Handle blur
-function onBlur(e) {
-    // Commit only on tinymce blur events and ignore native blur events
-    if (!(e instanceof Event)) {
-        commit();
-    }
-}
+            if (files) {
+                e.preventDefault();
+            }
+        });
 
-// Watch for props changes
-watch(
-    () => props.modelValue,
-    function () {
-        if (props.modelValue !== content.value) {
-            content.value = convertIn(props.modelValue || "");
+        if (this.autofocus) {
+            this.editor.content.focus();
         }
+    },
+    watch: {
+        value(value) {
+            if (value != this.editor.content.innerHTML) {
+                this.editor.content.innerHTML = value || "";
+            }
+        },
+        focussed(focus) {
+            this.$emit(focus ? "focus" : "blur");
+        }
+    },
+    beforeUnmount() {
+        this.onUnmount();
+    },
+    methods: {
+        focus(cursor = null) {
+            this.editor?.content?.focus();
+            if (cursor == "end" && this.editor?.content) {
+                setTimeout(() => {
+                    window.getSelection().selectAllChildren(this.editor.content);
+                    window.getSelection().collapseToEnd();
+                    this.editor.content.scrollTop = 9999;
+                });
+            }
+        },
+        onChanged() {
+            // When text in changed
+            this.commit();
+        },
+        onBlur() {
+            // When editor lost focus
+            this.commit();
+        },
+        onUnmount() {
+            // When editor is unmounted
+            this.commit();
+        },
+        commit() {
+            const content = this.editor.content.innerHTML;
+            if (content != this.value) {
+                this.$emit("input", content);
+            }
+        },
+        execCommand(...args) {
+            exec(...args);
+        },
     }
-);
-</script> -->
+};
+</script>

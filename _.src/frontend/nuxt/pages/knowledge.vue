@@ -1,48 +1,40 @@
 <template>
     <div class="knowledge">
         <v-container class="pb-0 mb-3 white">
-            <div class="d-flex align-center justify-space-between gap-3 py-4 agents-agent-header">
-                <v-btn to="/agents" icon small>
-                    <v-icon color="black">mdi-chevron-left</v-icon>
-                </v-btn>
-                <div class="text-h7 font-weight-medium agents-agent-header-title">News</div>
-            </div>
+            <Breadcrumbs title="News" />
         </v-container>
 
         <v-container>
             <v-text-field placeholder="Search here" outlined clearable hide-details clear-icon="mdi-close-circle"
-                color="teal lighten-1" class="rounded-xl property-search mb-3">
+                color="primary" class="rounded-xl property-search mb-3">
                 <template #prepend-inner>
                     <v-icon>mdi-magnify</v-icon>
                 </template>
             </v-text-field>
         </v-container>
 
-        <v-container>
-            <Carousel>
-                <div v-for="(article, idx) in slides" :key="idx" class="carousel-cell">
-                    <div class="carousel-cell-img rounded-xl overflow-hidden">
-                        <div class="carousel-cell-img-body pa-4 d-flex flex-column gap-2">
-                            <div class="d-flex gap-1">
-                                <v-chip v-for="tag in article.tags" :key="tag" small>{{ tag }}</v-chip>
-                            </div>
-                            <div class="white--text d-flex flex-column gap-2">
-                                <div class="text-h6 font-weight-bold">{{ article.title }}</div>
-                                <div>{{ article.location }}</div>
-                                <div class="d-flex gap-3 align-center">
-                                    <ArticleAuthor :article="article" class="flex-grow-1" />
-                                    <v-btn icon>
-                                        <Icon icon="arrow-up-right" />
-                                    </v-btn>
-                                </div>
+        <Carousel height="304">
+            <v-carousel-item v-for="(article, idx) in slides" :key="idx" class="px-3">
+                <v-img :src="article.cover" class="align-end rounded-xl" height="304"
+                    gradient="to top, rgba(18, 18, 18, 0.8) 0%, rgba(18, 18, 18, 0.6) 155px, rgba(0, 0, 0, 0) 206px">
+                    <div class="pa-4 d-flex flex-column gap-2">
+                        <div class="d-flex gap-1">
+                            <v-chip v-for="tag in article.tags" :key="tag" small>{{ tag }}</v-chip>
+                        </div>
+                        <div class="white--text d-flex flex-column gap-2">
+                            <div class="text-h6 font-weight-bold">{{ article.title }}</div>
+                            <div>{{ article.location }}</div>
+                            <div class="d-flex gap-3 align-center">
+                                <ArticleAuthor :article="article" class="flex-grow-1" />
+                                <v-btn icon>
+                                    <Icon icon="arrow-up-right" />
+                                </v-btn>
                             </div>
                         </div>
-                        <div class="carousel-cell-img-gradient"></div>
-                        <img :data-flickity-lazyload="article.cover" class="w-100" />
                     </div>
-                </div>
-            </Carousel>
-        </v-container>
+                </v-img>
+            </v-carousel-item>
+        </Carousel>
 
         <v-container>
             <div class="white pa-4 rounded-xl">
@@ -74,6 +66,9 @@
 
 <script>
 export default {
+    route: {
+        title: "News"
+    },
     data() {
         return {
             slides: Array(4).fill({

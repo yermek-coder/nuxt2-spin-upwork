@@ -5,3 +5,5 @@ export function clone(obj) {
 
     return JSON.parse(JSON.stringify(obj));
 }
+
+export const IMAGE_TYPES = ["image/bmp", "image/jpeg", "image/png", "image/webp"]

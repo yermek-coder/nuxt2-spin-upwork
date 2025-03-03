@@ -3,10 +3,16 @@
 
 <script>
 export default {
-    mounted() {
-        this.$vuetify.theme.isDark = true
+    watch: {
+        '$vuetify': {
+            handler() {
+                this.$vuetify.theme.isDark = true
+            },
+            once: true,
+            immediate: true
+        }
     },
-    unmounted() {
+    beforeDestroy() {
         this.$vuetify.theme.isDark = false
     }
 }

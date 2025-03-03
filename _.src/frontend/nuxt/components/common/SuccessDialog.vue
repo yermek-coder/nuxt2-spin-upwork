@@ -8,7 +8,7 @@
             </div>
             <v-spacer></v-spacer>
             <div class="d-flex">
-                <v-btn @click="$emit('dismiss')" class="elevation-0 teal lighten-1 white--text flex-grow-1"
+                <v-btn @click="$emit('dismiss')" color="primary" class="elevation-0 white--text flex-grow-1"
                     x-large>Close</v-btn>
             </div>
         </v-container>

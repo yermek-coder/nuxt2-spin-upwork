@@ -7,7 +7,7 @@
             <div class="d-flex gap-2 align-center">
                 <v-icon>mdi-calendar-month-outline</v-icon>
                 <div class="text-body-3">Expired {{ voucher.expired }}</div>
-                <v-btn :disabled="voucher.past" class="teal lighten-1 white--text elevation-0" x-small>Use
+                <v-btn :disabled="voucher.past" class="primary white--text elevation-0" x-small>Use
                     Now</v-btn>
             </div>
         </div>

@@ -1,6 +1,7 @@
 :root {
   --bg-body: #FAFBFB;
   --bg-body-2: #FCFCFC;
+  --bg-body-dark: #151515;
 
   --stroke-color-1: #EDEDF3;
   --stroke-grey-1: 1px solid var(--stroke-color-1);
@@ -11,11 +12,19 @@
 
   --color-text-secondary-2: #6B6F89;
 
+  --color-grey-1: #2E2E2E;
+
+  --card-outline-color: #E6E6E6;
+
   --gradient-teal: linear-gradient(180deg, var(--color-teal-1), var(--color-teal-3))
 }
 
 .theme--light.v-application {
   background-color: var(--bg-body);
+}
+
+.theme--dark.v-application {
+  background-color: var(--bg-body-dark);
 }
 
 .v-application .theme--light.v-chip:not(.v-chip--active) {
@@ -68,6 +77,10 @@
   position: relative;
 }
 
+.position-absolute {
+  position: relative;
+}
+
 .card-image-badge {
   position: absolute;
   z-index: 1;
@@ -82,4 +95,35 @@
     top: -1px;
     border-top-left-radius: 1px;
   }
+}
+
+.pane {
+  inset: 0;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+}
+
+.pane-h {
+  flex-direction: row;
+}
+
+.pane-item {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.pane-fill {
+  flex: 1 1 auto;
+  position: relative;
+}
+
+.pane-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  position: relative;
+}
+
+.v-chip.outlined {
+  outline: var(--color-grey-1) solid 1px;
 }

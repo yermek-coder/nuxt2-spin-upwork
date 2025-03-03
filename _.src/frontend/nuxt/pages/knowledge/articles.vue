@@ -1,7 +1,7 @@
 <template>
     <v-container class="knowledge-articles">
-        <div v-for="category in categories">
-            <div class="d-flex justify-space-between">
+        <div v-for="category in categories" class="mb-6">
+            <div class="d-flex justify-space-between mb-3">
                 <div class="text-h6">{{ category.title }}</div>
                 <NuxtLink to="#">View all</NuxtLink>
             </div>

@@ -1,11 +1,7 @@
 <template>
     <div class="agents-agent">
         <v-container class="pb-0 mb-3 white">
-            <div class="d-flex align-center justify-space-between gap-3 py-4 agents-agent-header">
-                <v-btn to="/agents" icon small>
-                    <v-icon color="black">mdi-chevron-left</v-icon>
-                </v-btn>
-                <div class="text-h7 font-weight-medium agents-agent-header-title">Agent</div>
+            <Breadcrumbs title="Agent">
                 <div class="d-flex align-center gap-2 black--text">
                     <v-btn icon>
                         <v-icon>mdi-heart-outline</v-icon>
@@ -14,7 +10,7 @@
                         <v-icon>mdi-export-variant</v-icon>
                     </v-btn>
                 </div>
-            </div>
+            </Breadcrumbs>
         </v-container>
 
         <v-container class="mb-4">
@@ -60,8 +56,8 @@
 
         <NuxtChild v-bind="{ agent, listingCategoriesActive, listingCategories, properties }" />
 
-        <v-sheet class="bottom-sheet elevation-10">
-            <v-container class="pt-4">
+        <v-sheet class="bottom-sheet elevation-10" outlined>
+            <v-container class="pt-4 pb-2">
                 <div class="d-flex flex-column mb-1">
                     <div class="agents-item d-flex gap-4 justify-space-between">
                         <v-avatar><img :src="agent.avatar" alt="Avatar"></v-avatar>

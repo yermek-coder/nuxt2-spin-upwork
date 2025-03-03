@@ -18,13 +18,13 @@
                         <div class="text-body-2 font-weight-light text--secondary">Max 1Mb</div>
                     </div>
                     <div class="d-flex align-center">
-                        <v-btn color="teal" outlined class="form-upload">
+                        <v-btn color="primary" outlined class="form-upload">
                             Upload
                             <input @cancel.stop @change="addProfilePhoto" :accept="imageTypes" type="file" />
                         </v-btn>
                     </div>
                 </div>
-                <div class="d-flex gap-4 align-center">
+                <div class="d-flex gap-4 align-center mb-3">
                     <v-avatar color="teal lighten-5" size="64">
                         <v-icon class="text-h4">mdi-account</v-icon>
                     </v-avatar>
@@ -33,7 +33,7 @@
                         <div class="text-body-2 font-weight-light text--secondary">Max 1Mb</div>
                     </div>
                     <div class="d-flex align-center">
-                        <v-btn color="teal" outlined class="form-upload">
+                        <v-btn color="primary" outlined class="form-upload">
                             Upload
                             <input @cancel.stop @change="addCoverPhoto" :accept="imageTypes" type="file" />
                         </v-btn>
@@ -42,20 +42,19 @@
                 <div>
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Name per PIC <span
                             class="red--text">*</span></div>
-                    <v-text-field v-model="form.name" hide-details outlined color="teal lighten-1" class="rounded-xl" />
+                    <v-text-field v-model="form.name" hide-details outlined color="primary" class="rounded-xl" />
                 </div>
                 <div>
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Company Name <span
                             class="red--text">*</span></div>
-                    <v-text-field v-model="form.companyName" hide-details outlined color="teal lighten-1"
-                        class="rounded-xl" />
+                    <v-text-field v-model="form.companyName" hide-details outlined color="primary" class="rounded-xl" />
                 </div>
                 <div>
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Company Phone</div>
                     <PhoneField v-model="form.phone" />
                 </div>
                 <div>
-                    <v-text-field v-model="form.verify" hide-details outlined color="teal lighten-1" class="rounded-xl">
+                    <v-text-field v-model="form.verify" hide-details outlined color="primary" class="rounded-xl">
                         <template #append>
                             <span class="teal--text">Verify</span>
                         </template>
@@ -65,20 +64,20 @@
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Email <span
                             class="red--text">*</span></div>
                     <v-text-field v-model="form.email" placeholder="email@example.com" hide-details outlined
-                        color="teal lighten-1" class="rounded-xl" />
+                        color="primary" class="rounded-xl" />
                 </div>
                 <div>
                     <div class="text-body-3 font-weight-light text--secondary mb-1">Description more about yourself
                     </div>
-                    <v-textarea v-model="form.descriptions" hide-details outlined rows="3" color="teal lighten-1"
+                    <v-textarea v-model="form.descriptions" hide-details outlined rows="3" color="primary"
                         class="rounded-xl" />
                 </div>
             </div>
         </v-container>
 
-        <v-sheet class="bottom-sheet elevation-10">
-            <v-container class="d-flex">
-                <v-btn class="elevation-0 flex-grow-1 teal lighten-2 white--text" x-large><v-icon>mdi-plus</v-icon>
+        <v-sheet class="bottom-sheet elevation-0" outlined>
+            <v-container class="d-flex py-2">
+                <v-btn color="primary" class="elevation-0 flex-grow-1 white--text" x-large><v-icon>mdi-plus</v-icon>
                     <div class="ms-4">Submit</div>
                 </v-btn>
             </v-container>
@@ -87,13 +86,15 @@
 </template>
 
 <script>
+import { IMAGE_TYPES } from '~/util'
+
 export default {
     route: {
         title: "Application"
     },
     data() {
         return {
-            imageTypes: ["image/bmp", "image/jpeg", "image/png", "image/webp"],
+            imageTypes: IMAGE_TYPES,
             form: {
                 profilePhoto: null,
                 coverPhoto: null

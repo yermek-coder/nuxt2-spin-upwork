@@ -1,6 +1,6 @@
 .property-card {
     height: fit-content;
-    outline: #E6E6E6 solid 1px !important;
+    outline: var(--card-outline-color) solid 1px !important;
 }
 
 .property-card.horizontal {

@@ -1,37 +1,26 @@
 <template>
-    <div ref="carousel" class="carousel">
-        <slot />
+    <div class="carousel2 position-relative">
+        <v-carousel ref="carousel" v-model="value" :show-arrows="false" hide-delimiters :height="height" class="mb-6">
+            <slot />
+        </v-carousel>
+        <div class="carousel-delimeter d-flex gap-1 justify-center">
+            <div v-for="idx in size" :key="idx" :class="idx - 1 === value ? 'primary px-2' : 'grey lighten-1'"
+                class="pa-1 rounded-xl" />
+        </div>
     </div>
 </template>
 
 <script>
 export default {
+    props: ["height"],
     data() {
         return {
-            checkCounter: 0,
-            flickity: null,
+            value: 0,
+            size: 0
         }
     },
     mounted() {
-        this.init()
+        this.size = this.$refs.carousel.items.length
     },
-    unmounted() {
-        this.flickity?.destroy?.()
-    },
-    methods: {
-        init() {
-            this.checkCounter += 1;
-            if (window.Flickity) {
-                this.flickity = new window.Flickity(this.$refs.carousel, {
-                    wrapAround: true,
-                    lazyLoad: true,
-                    imagesLoaded: true,
-                    prevNextButtons: false
-                })
-            } else if (this.checkCounter < 10) {
-                setTimeout(this.init, 100)
-            }
-        }
-    }
 }
 </script>

@@ -1,26 +1,22 @@
 <template>
     <div>
         <v-container class="pb-0 mb-3 white">
-            <div class="d-flex align-center justify-space-between gap-3 py-4">
-                <Breadcrumbs />
-
-                <div class="d-flex align-center gap-2 black--text">
-                    <v-btn @click="share" icon>
-                        <v-icon>mdi-export-variant</v-icon>
-                    </v-btn>
-                </div>
-            </div>
+            <Breadcrumbs>
+                <v-btn @click="share" icon>
+                    <v-icon>mdi-export-variant</v-icon>
+                </v-btn>
+            </Breadcrumbs>
         </v-container>
 
         <v-container>
-            <v-img :src="article.coverFull" height="201" class="rounded-xl"></v-img>
-            <div class="text-h4">{{ article.title }}</div>
-            <div>{{ $date(article.created, 'date_month_full') }} | {{ $time(article.created) }}</div>
-            <ArticleAuthor :article="article" />
+            <v-img :src="article.coverFull" height="201" class="rounded-xl mb-4"></v-img>
+            <div class="text-h4 mb-3">{{ article.title }}</div>
+            <div class="mb-2">{{ $date(article.created, 'date_month_full') }} | {{ $time(article.created) }}</div>
+            <ArticleAuthor :article="article" class="mb-4" />
 
-            <div v-html="article.content"></div>
+            <div v-html="article.content" class="mb-4 html-content"></div>
 
-            <div class="d-flex justify-space-between">
+            <div class="d-flex justify-space-between mb-3">
                 <div class="text-h6">{{ article.category }}</div>
                 <NuxtLink to="#">View all</NuxtLink>
             </div>
@@ -48,8 +44,8 @@ export default {
     methods: {
         share() {
             shareService.showShareDialog({
-                title: this.agent.name + " " + this.agent.surname,
-                text: this.agent.about,
+                title: this.article.name + " " + this.article.surname,
+                text: this.article.about,
                 url: window.location.href,
             })
         }

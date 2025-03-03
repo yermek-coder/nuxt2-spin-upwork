@@ -7,7 +7,7 @@
             <div class="mb-3">
                 <div class="text-body-4 properties-promos-descr text-wrap">{{ promo.descr }}</div>
             </div>
-            <v-btn rounded small color="teal lighten-5" class="teal--text text--lighten-2 text-body-3">Get it
+            <v-btn rounded small color="primary" class="teal--text text--lighten-2 text-body-3">Get it
                 now</v-btn>
         </div>
     </v-container>

@@ -18,8 +18,8 @@
 
             <div class="d-flex gap-2">
                 <v-btn @click="reset" text x-large elevation="0">reset</v-btn>
-                <v-btn @click="$emit('close', cloneFilters)" color="teal lighten-1" x-large
-                    class="white--text flex-grow-1" elevation="0">confirm</v-btn>
+                <v-btn @click="$emit('close', cloneFilters)" color="primary" x-large class="white--text flex-grow-1"
+                    elevation="0">confirm</v-btn>
             </div>
         </v-container>
     </v-card>

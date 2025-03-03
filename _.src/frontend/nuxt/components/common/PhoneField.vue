@@ -1,5 +1,5 @@
 <template>
-    <v-text-field v-model="phone" outlined hide-details placeholder="Phone Number" type="number" color="teal lighten-1"
+    <v-text-field v-model="phone" outlined hide-details placeholder="Phone Number" type="number" color="primary"
         class="rounded-xl form-phone">
         <template #prepend-inner>
             <v-menu v-model="visible" @input="q = ''" offset-y max-height="50vh" :close-on-content-click="false">
@@ -14,8 +14,7 @@
                     </div>
                 </template>
                 <v-card>
-                    <v-text-field v-model="q" outlined autofocus hide-details clearable
-                        color="teal lighten-1"></v-text-field>
+                    <v-text-field v-model="q" outlined autofocus hide-details clearable color="primary"></v-text-field>
                     <v-list>
                         <v-list-item @click="pickCountryCode(item)" v-for="(item, index) in countriesFiltered"
                             :key="index">
