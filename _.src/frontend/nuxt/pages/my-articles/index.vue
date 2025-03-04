@@ -14,7 +14,7 @@
                 </v-chip>
             </v-chip-group>
 
-            <div class="d-flex flex-column gap-5">
+            <div class="d-flex flex-column gap-4">
                 <ArticleCardAdmin v-for="(article, idx) in articles" :key="idx" :article="article" />
             </div>
         </v-container>

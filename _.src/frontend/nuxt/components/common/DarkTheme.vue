@@ -4,7 +4,7 @@
 <script>
 export default {
     watch: {
-        '$vuetify': {
+        '$vuetify.theme.isDark': {
             handler() {
                 this.$vuetify.theme.isDark = true
             },
