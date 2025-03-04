@@ -36,7 +36,7 @@
                             <div class="subtitle-2">{{ item.title }}</div>
                             <div class="text--secondary text-body-4">{{ item.credits }} credits</div>
                         </div>
-                        <v-btn color="primary" class="elevation-0 rounded-0 white--text flex-grow-1" text>Redeem</v-btn>
+                        <v-btn color="primary" class="elevation-0 rounded-0 white--text flex-grow-1">Redeem</v-btn>
                     </v-card>
                 </v-col>
             </v-row>
