@@ -1,6 +1,6 @@
 <template>
     <v-text-field @focus="openFilters" v-model="filters.q" :placeholder="placeholder" outlined clearable hide-details
-        clear-icon="mdi-close-circle" color="primary" class="rounded-xl property-search">
+        clear-icon="mdi-close-circle" color="primary" class="white rounded-xl property-search">
         <template #prepend-inner>
             <div class="d-flex gap-2 align-center ms-1 black--text">
                 <span class="font-weight-bold">PG</span>
