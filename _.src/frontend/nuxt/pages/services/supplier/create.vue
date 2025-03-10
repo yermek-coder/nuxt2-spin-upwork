@@ -77,7 +77,7 @@
 
         <v-sheet class="bottom-sheet elevation-0" outlined>
             <v-container class="d-flex py-2">
-                <v-btn color="primary" class="elevation-0 flex-grow-1 white--text" x-large><v-icon>mdi-plus</v-icon>
+                <v-btn color="primary" class="elevation-0 flex-grow-1 white--text" x-large>
                     <div class="ms-4">Submit</div>
                 </v-btn>
             </v-container>

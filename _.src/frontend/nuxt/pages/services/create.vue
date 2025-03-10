@@ -24,7 +24,7 @@
         <v-container>
             <div class="white rounded-xl pa-4 d-flex flex-column gap-3">
                 <div class="text-h7 font-weight-medium mb-2">Thumbnail</div>
-                <UploadArea @change="addThumbnail" :types="imageTypes" />
+                <UploadArea @change="addThumbnail" :types="imageTypes" maxSize="5MB" />
             </div>
         </v-container>
         <v-container>
@@ -124,7 +124,7 @@
         <v-sheet class="bottom-sheet elevation-0" outlined>
             <v-container class="d-flex py-2">
                 <v-btn color="primary" class="elevation-0 flex-grow-1 white--text" x-large><v-icon>mdi-plus</v-icon>
-                    <div class="ms-4">Create</div>
+                    <div class="ms-4">New Service</div>
                 </v-btn>
             </v-container>
         </v-sheet>

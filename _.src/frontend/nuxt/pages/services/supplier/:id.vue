@@ -37,16 +37,28 @@
             </div>
         </v-container>
 
-        <v-container>
-            <div class="d-flex gap-3 chip-tab-navigation">
-                <v-chip v-for="item in tabs" :key="item.path" :to="{ name: item.name }"
-                    exact-active-class="v-chip--exact-active teal--text" class="flex-grow-1 justify-center">
-                    {{ item.title }}
-                </v-chip>
-            </div>
-        </v-container>
+        <div>
+            <v-container>
+                <v-card class="white pa-4 rounded-xl elevation-0">
+                    <div class="text-h7 font-weight-medium mb-2">About {{ supplier.name }}</div>
+                    <p class="text-body-2 mb-0">{{ supplier.about }}</p>
+                </v-card>
+            </v-container>
 
-        <NuxtChild v-bind="{ supplier, listingCategoriesActive, listingCategories, properties }" />
+            <v-container>
+                <v-card class="white pa-4 rounded-xl elevation-0 mb-16">
+                    <div class="text-h7 font-weight-medium mb-2">Active Listing</div>
+                    <v-chip-group :value="listingCategoriesActive"
+                        @input="$emit('input:listingCategoriesActive', $event)" mandatory>
+                        <v-chip v-for="item in listingCategories" :key="item" :value="item" active-class="teal--text"
+                            class="flex-grow-1 justify-center">{{ item }}</v-chip>
+                    </v-chip-group>
+                    <div class="properties-list properties-list-single-col pb-12">
+                        <PropertyCard v-for="(item, index) in properties" :key="index" :property="item" horizontal />
+                    </div>
+                </v-card>
+            </v-container>
+        </div>
 
         <v-sheet class="bottom-sheet elevation-10" outlined>
             <v-container class="pt-4 pb-2">
@@ -91,7 +103,6 @@ export default {
         return {
             supplier: serviceManager.getSupplier(this.$route.params.id),
             tab: null,
-            tabs: [],
             listingCategoriesActive: [],
             listingCategories: [
                 "All",
@@ -101,15 +112,6 @@ export default {
             ],
             properties: propertyServices.getProperties(),
         }
-    },
-    created() {
-        Promise.all((this.$routes.find(page => page.path === "/services/supplier/:id")?.children || []).map(async page => {
-            return ({ ...page, component: await page.component() })
-        })).then(pages => {
-            this.tabs = pages
-                .sort((a, b) => (a.component.route.order > b.component.route.order ? 1 : -1))
-                .map(({ path, component, name }) => ({ title: component.route.title, path, name }))
-        })
     },
     methods: {
         share() {
