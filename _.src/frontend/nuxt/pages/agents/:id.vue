@@ -14,7 +14,7 @@
         </v-container>
 
         <v-container class="mb-4">
-            <v-img src="/agent-cover.jpg" height="97" class="agents-agent-cover">
+            <v-img src="/agent-cover.webp" height="97" class="agents-agent-cover">
                 <v-avatar size="88"><img :src="agent.avatar" :alt="agent.name"></v-avatar>
             </v-img>
         </v-container>

@@ -11,7 +11,7 @@
         </v-container>
 
         <v-container v-if="voucher">
-            <v-img src="/voucher.jpg" class="mb-4"></v-img>
+            <v-img src="/voucher.webp" class="mb-4"></v-img>
 
             <div class="d-flex flex-column gap-3">
                 <div class="text-h5">{{ voucher.title }}</div>

@@ -72,13 +72,13 @@ export default {
     data() {
         return {
             slides: Array(4).fill({
-                cover: "/article-cover.jpg",
+                cover: "/article-cover.webp",
                 tags: ["Trending"],
                 title: "OPR In Malaysia: How It Affects You",
                 location: "Sunway Velocity, KL",
                 author: {
                     name: "RYAN REYFORD",
-                    avatar: "/author-avatar.jpg"
+                    avatar: "/author-avatar.webp"
                 }
             }),
             steps: [

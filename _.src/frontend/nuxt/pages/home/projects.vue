@@ -69,10 +69,10 @@ export default {
             filters: {},
             properties: propertyServices.getProperties(),
             launches: [
-                { title: "Africa", location: "Tanjung Tokong, Penang", preview: "/launch1.jpg" },
-                { title: "FERA", location: "Tanjung Tokong, Penang", preview: "/launch2.jpg" },
-                { title: "The Lume", location: "Tanjung Tokong, Penang", preview: "/launch3.jpg" },
-                { title: "Africa", location: "Tanjung Tokong, Penang", preview: "/launch4.jpg" },
+                { title: "Africa", location: "Tanjung Tokong, Penang", preview: "/launch1.webp" },
+                { title: "FERA", location: "Tanjung Tokong, Penang", preview: "/launch2.webp" },
+                { title: "The Lume", location: "Tanjung Tokong, Penang", preview: "/launch3.webp" },
+                { title: "Africa", location: "Tanjung Tokong, Penang", preview: "/launch4.webp" },
             ]
         }
     }

@@ -21,7 +21,7 @@
                 <v-divider></v-divider>
                 <div class="pa-4">
                     <div class="agents-featured-card-grid gap-4">
-                        <v-img v-for="idx in 10" :key="idx" :src="`/agencies/agency_${idx}.jpg`">
+                        <v-img v-for="idx in 10" :key="idx" :src="`/agencies/agency_${idx}.webp`">
                         </v-img>
                     </div>
                 </div>

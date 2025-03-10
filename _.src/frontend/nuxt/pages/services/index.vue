@@ -39,7 +39,7 @@ export default {
             services: [
                 {
                     isPromo: true,
-                    src: "/banner-promo.jpg"
+                    src: "/banner-promo.webp"
                 },
                 ...servicesManager.getAll().slice(0, 3)
             ]

@@ -12,7 +12,7 @@ const exampleProperties = [
         },
         location: "Tanjung Tokong, Penang",
         preview: {
-            src: "/home-card.jpg"
+            src: "/home-card.webp"
         }
     },
     {
@@ -32,7 +32,7 @@ const exampleProperties = [
         },
         location: "Tanjung Tokong, Penang",
         preview: {
-            src: "/home-card.jpg"
+            src: "/home-card.webp"
         },
         vr: true,
     },
@@ -53,7 +53,7 @@ const exampleProperties = [
         },
         location: "Tanjung Tokong, Penang",
         preview: {
-            src: "/home-card.jpg"
+            src: "/home-card.webp"
         },
         vr: true,
     },

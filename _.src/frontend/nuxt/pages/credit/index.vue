@@ -58,7 +58,7 @@ export default {
             activeCategory: null,
             rewards: Array(6).fill({
                 title: "Zus RM8 Cash Voucher",
-                cover: "/reward-cover.jpg",
+                cover: "/reward-cover.webp",
                 credits: 300
             })
         }

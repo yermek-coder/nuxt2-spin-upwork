@@ -21,12 +21,12 @@ export default {
                 {
                     title: "Interior Design",
                     descr: "Insert your property name to get design solution",
-                    bgImg: "/card-bg.jpg"
+                    bgImg: "/card-bg.webp"
                 },
                 {
                     title: "Interior Design",
                     descr: "Insert your property name to get design solution",
-                    bgImg: "/card-bg.jpg"
+                    bgImg: "/card-bg.webp"
                 }
             ]
         }
