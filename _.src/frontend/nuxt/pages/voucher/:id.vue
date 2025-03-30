@@ -48,7 +48,7 @@ export default {
                     title: this.voucher.title,
                     description: `Congratulation you got ${this.voucher.title}. You can use this voucher based on the T&C.`,
                 },
-                fullscreen: true
+                fullscreen: true,
             })
         }
     }

@@ -1,140 +1,155 @@
+import api from "./api"
+
 class KnowledgeService {
-    getArticles() {
-        return [
-            {
-                id: 1,
-                minutesRead: 6,
-                title: "Solo Travel: Embrace Freedom Abroad",
-                location: "Sunway Velocity,KL",
-                cover: "/article-card-cover-1.webp",
-                coverFull: "/article-cover-full.webp",
-                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu porttitor nisl. Mauris non sem consequat, cursus nunc eget, dictum est. Nam tincidunt ullamcorper lectus, in varius nisl vehicula et. Mauris congue cursus facilisis. Phasellus lobortis metus sed imperdiet laoreet. Nunc finibus ligula quis dolor hendrerit sodales. Aliquam erat volutpat. Nullam tempus tortor sit amet lorem suscipit convallis.',
-                category: "Finance",
-                author: {
-                    name: "RYAN REYFORD",
-                    avatar: "/author-avatar.webp"
-                },
-                created: new Date().toISOString()
-            },
-            {
-                id: 2,
-                minutesRead: 6,
-                title: "Road Tripping: Unforgettable Adventures On Wheels",
-                location: "Sunway Velocity,KL",
-                cover: "/article-card-cover-2.webp",
-                author: {
-                    name: "RYAN REYFORD",
-                    avatar: "/author-avatar.webp"
-                },
-                created: new Date().toISOString()
-            },
-            {
-                id: 3,
-                minutesRead: 6,
-                title: "Capturing Moments: Travel Photography Tips",
-                location: "Sunway Velocity,KL",
-                cover: "/article-card-cover-3.webp",
-                author: {
-                    name: "RYAN REYFORD",
-                    avatar: "/author-avatar.webp"
-                },
-                created: new Date().toISOString()
+    $modal;
+
+    statusMap = {
+        publish: {
+            title: "Published",
+            class: "teal white--text",
+        },
+        draft: {
+            title: "Draft",
+            class: "green lighten-1",
+        },
+        pending: {
+            title: "Pending Review",
+            class: "orange lighten-1",
+        },
+        archived: {
+            title: "Archived",
+            class: "black",
+        },
+        delete: {
+            title: "Deleted",
+            class: "red white--text",
+        },
+        rejected: {
+            title: "Rejected",
+            class: "red white--text",
+        },
+    }
+
+    getFeatured() {
+        return api.post("user/knowledgebase/get.php", { type: "featured" }).then(result => result.data)
+    }
+
+    getExplore() {
+        return api.post("user/knowledgebase/get.php", { type: "explore" }).then(result => result.data)
+    }
+
+    async report(entity) {
+        const form = await this.$modal({ component: 'KnowledgeReportDialog', props: { entity } })
+        if (form) {
+            return api.post('/user/knowledgebase/report.php', {
+                user_id: 1,
+                reason: form.reason,
+                type: 'article',
+                report_id: entity?.article_id || entity?.video_id || entity?.id
             }
-        ]
-    }
-
-    getMyArticles() {
-        return Array(3).fill({
-            id: 1,
-            tags: ["New Property"],
-            state: "published",
-            minutesRead: 6,
-            title: "Shop-office at Bandar Meru Raya",
-            location: "Sunway Velocity,KL",
-            cover: "/article-cover-2.webp",
-            coverFull: "/article-cover-full.webp",
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu porttitor nisl. Mauris non sem consequat, cursus nunc eget, dictum est. Nam tincidunt ullamcorper lectus, in varius nisl vehicula et. Mauris congue cursus facilisis. Phasellus lobortis metus sed imperdiet laoreet. Nunc finibus ligula quis dolor hendrerit sodales. Aliquam erat volutpat. Nullam tempus tortor sit amet lorem suscipit convallis.',
-            category: "Finance",
-            author: {
-                name: "RYAN REYFORD",
-                avatar: "/author-avatar.webp"
-            },
-            updated: new Date().toISOString(),
-            modified: new Date().toISOString(),
-            commentsCount: 23,
-            likesCount: "1K",
-            shareCount: 100,
-        })
-    }
-
-    getArticle(id) {
-        return this.getArticles()[0]
-    }
-
-    getMyArticle(id) {
-        return {
-            id: 1,
-            tags: ["New Property"],
-            state: "published",
-            minutesRead: 6,
-            title: "Homes for sale in remote parts of Britain – in pictures",
-            location: "Sunway Velocity,KL",
-            cover: "/article-cover-2.webp",
-            coverFull: "/article-cover-full.webp",
-            content: `
-                <p>In 2001, two agricultural barns were refashioned into two homes, with separate entrances, but one connecting internal door. Whitehouse Barns has been run as holiday lets (planning restrictions mean it has to be unoccupied for 45 days a year between January and March) but could form one large,</p>
-                <p>eight-bedroom lateral home. They both have four bedrooms and an open-plan kitchen-living space all set in 1 acre, with decking on to the River Blyth. Walberswick and Southwold (think beach hut-lined promenade) are a short drive away. £950,000. The Modern House, 020 3795 5920</p>
-                <img src="http://localhost:3000/article-cover-full-2.webp">
-                <h3>Ardentinny, Argyll and Bute</h3>
-                <p>eight-bedroom lateral home. They both have four bedrooms and an open-plan kitchen-living space all set in 1 acre, with decking on to the River Blyth. Walberswick and Southwold (think beach hut-lined promenade) are a short drive away. £950,000. The Modern House, 020 3795 5920</p>
-            `,
-            category: "Finance",
-            author: {
-                name: "RYAN REYFORD",
-                avatar: "/author-avatar.webp"
-            },
-            updated: new Date().toISOString(),
-            modified: new Date().toISOString(),
-            commentsCount: 23,
-            likesCount: "1K",
-            shareCount: 100,
+            ).then(() => true)
         }
-    }
-
-    getVideos() {
-        return [
-            {
-                duration: "7:30",
-                title: "How Much Home Loan Can You Get Based On Your Salary In Malaysia?",
-                location: "Sunway Velocity,KL",
-                cover: "/video-preview-1.webp",
-                author: {
-                    name: "RYAN REYFORD",
-                    avatar: "/author-avatar.webp"
-                }
-            },
-            {
-                title: "Real Property Gains Tax (RPGT) In Malaysia, And Why It's So Important!",
-                location: "Sunway Velocity,KL",
-                duration: "5:45",
-                cover: "/video-preview-2.webp",
-                author: {
-                    name: "RYAN REYFORD",
-                    avatar: "/author-avatar.webp"
-                }
-            },
-            {
-                title: "New B40 Income Classifications And 2 Housing Schemes To Check Out",
-                location: "Sunway Velocity,KL",
-                duration: "4:20",
-                cover: "/video-preview-3.webp",
-                author: {
-                    name: "RYAN REYFORD",
-                    avatar: "/author-avatar.webp"
-                }
-            }
-        ]
     }
 }
 
-export default new KnowledgeService()
+class ArticleService {
+    $modal;
+
+    getArticles() {
+        return api.post("user/knowledgebase/get.php", { type: "articles" }).then(result => result.data)
+    }
+
+    getArticle(slug) {
+        return api.post("user/knowledgebase/get.php", { type: "single_article", slug }).then(result => result.data)
+    }
+
+    getMyArticles(user_id) {
+        return api.post("agent/article/get.php", { user_id }).then(result => result.data.map(article => ({
+            ...article,
+            minutes_read: 6,
+            cover: article.cover_image.includes("localhost") ? '/article-cover-full.webp' : article.cover_image,
+            comments_count: 23,
+            likes_count: "1K",
+            share_count: 100,
+        })))
+    }
+
+    getMyArticle(user_id, article_id) {
+        return api.post("agent/article/get.php", { user_id, article_id }).then(result => ({
+            ...result.data,
+            minutes_read: 6,
+            cover: result.data.cover_image.includes("localhost") ? '/article-cover-full.webp' : result.data.cover_image,
+            comments_count: 23,
+            likes_count: "1K",
+            share_count: 100,
+        }))
+    }
+
+    async removeArticle(article) {
+        const result = await this.$modal({
+            component: 'DeleteConfirmDialog', contentClass: 'align-self-end mx-4', width: '100%',
+            transition: "dialog-bottom-transition", props: { description: "Are you sure want to delete this article?" }
+        })
+        if (result) {
+            return api.post("agent/article/status.php", { article_id: article.article_id, status: 'delete' }).then(() => true)
+        }
+    }
+
+    archiveArticle(article) {
+        return api.post("agent/article/status.php", { article_id: article.article_id, status: 'archive' })
+    }
+
+    editArticle(article) {
+        return api.post("agent/article/update.php", article)
+    }
+
+    createArticle(article) {
+        return api.post("agent/article/add.php", article)
+    }
+
+    getArticleCategories() {
+        return api.post("selection/get.php", { "value": ["articlescategory"] }).then(result => result.articlescategory)
+    }
+}
+
+class VideoService {
+    $modal;
+
+    getVideos() {
+        return api.post("user/knowledgebase/get.php", { type: "videos" }).then(result => result.data)
+    }
+
+    getMyVideos(user_id) {
+        return api.post("agent/video/get.php", { user_id }).then(result => result.data)
+    }
+
+    getMyVideo(user_id, video_id) {
+        return api.post("agent/video/get.php", { user_id, video_id }).then(result => result.data)
+    }
+
+    createVideo(video) {
+        return api.post("agent/video/add.php", video)
+    }
+
+    editVideo(video) {
+        return api.post("agent/video/update.php", video)
+    }
+
+    archiveVideo(video) {
+        return api.post("agent/video/status.php", { video_id: video.video_id, status: 'archive' })
+    }
+
+    async removeVideo(video) {
+        const result = await this.$modal({
+            component: 'DeleteConfirmDialog', contentClass: 'align-self-end mx-4', width: '100%',
+            transition: "dialog-bottom-transition", props: { description: "Are you sure want to delete this video?" }
+        })
+        if (result) {
+            return api.post("agent/video/status.php", { video_id: video.video_id, status: 'delete' }).then(() => true)
+        }
+    }
+}
+
+export const knowledgeService = new KnowledgeService()
+export const articleService = new ArticleService()
+export const videoService = new VideoService()

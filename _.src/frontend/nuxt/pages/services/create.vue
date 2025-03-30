@@ -24,7 +24,7 @@
         <v-container>
             <div class="white rounded-xl pa-4 d-flex flex-column gap-3">
                 <div class="text-h7 font-weight-medium mb-2">Thumbnail</div>
-                <UploadArea @change="addThumbnail" :types="imageTypes" maxSize="5MB" />
+                <ImageUploadArea @change="addThumbnail" maxSize="5MB" />
             </div>
         </v-container>
         <v-container>
@@ -132,8 +132,6 @@
 </template>
 
 <script>
-import { IMAGE_TYPES } from '~/util'
-
 export default {
     route: {
         title: "New Service",
@@ -154,7 +152,6 @@ export default {
                 thumbnail: null,
                 gallery: [],
             },
-            imageTypes: IMAGE_TYPES,
             previews: []
         }
     },

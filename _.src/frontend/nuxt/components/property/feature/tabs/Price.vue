@@ -1,6 +1,7 @@
 <template>
     <div class="property-feature-tabs-price">
-        <v-card outlined class="d-flex rounded-xl justify-space-between mb-4">
+        <v-card v-if="node !== 'property-search-onbording'" outlined
+            class="d-flex rounded-xl justify-space-between mb-4">
             <button @click="setMode('total')" :class="{ 'teal--text': filters.mode === 'total' }" class="px-6 py-3">
                 Total price (RM)
             </button>
@@ -12,10 +13,9 @@
 
         <v-row dense class="mb-2">
             <v-col v-for="(price, index) in priceRange" :key="index" cols="4">
-                <ChipSelectorItem :model="filters" :value="price" property="price"
-                    class="property-feature-tabs-price-chip justify-center">
+                <v-chip @click="setPriceRange(price)" class="property-feature-tabs-price-chip justify-center">
                     {{ price }}
-                </ChipSelectorItem>
+                </v-chip>
             </v-col>
         </v-row>
 
@@ -31,47 +31,62 @@
                 <span class="caption text-body-3">Reset</span>
             </div>
 
-            <v-range-slider v-model="range" :max="1000000" :min="10000" thumb-color="primary" thumb-label="always"
+            <v-range-slider v-model="range" :max="550000" :min="10000" thumb-color="primary" thumb-label="always"
                 track-fill-color="primary" track-color="grey lighten-3" class="align-center white--text">
-                <template #thumb-label="{ value }">{{ currency(value) }}</template>
+                <template #thumb-label="{ value }">${{ currency(value) }}K</template>
             </v-range-slider>
         </div>
     </div>
 </template>
 
 <script>
-import { debounce } from 'underscore';
+const priceMap = {
+    '100K Below': [10000, 100000],
+    '100K - 150K': [100000, 150000],
+    '150K - 200K': [150000, 200000],
+    '300K - 350K': [300000, 350000],
+    '400K - 450K': [400000, 450000],
+    '500K - 500K': [500000, 550000],
+}
 
 export default {
-    props: ["filters"],
+    props: ["filters", "node"],
     feature: {
         type: "filter",
-        node: "property-filters-dialog",
+        nodes: ["property-filters-dialog", "property-search-onbording"],
         title: "Price",
         order: 100,
     },
     data() {
         return {
-            priceRange: [
-                '100K Below',
-                '100K - 150K',
-                '150K-200K',
-                '300K - 350K',
-                '400K - 450K',
-                '500K - 500K',
-            ],
-            range: [200000, 600000]
+            priceRange: Object.keys(priceMap),
         }
     },
-    mounted() {
+    computed: {
+        range: {
+            get() {
+                return Object.values(this.filters?.budget || {})
+            },
+            set(range) {
+                this.$set(this.filters, "budget", { min: range[0], max: range[1] })
+            }
+        }
+    },
+    created() {
         this.setMode('total')
+        if (!this.filters?.budget) {
+            this.$set(this.filters, "budget", { min: 200000, max: 300000 })
+        }
     },
     methods: {
         setMode(mode) {
             this.$set(this.filters, "mode", mode)
         },
         currency(value) {
-            return `$${(value / 1000) << 0}K`
+            return (value / 1000) << 0
+        },
+        setPriceRange(key) {
+            this.range = priceMap[key]
         }
     }
 }

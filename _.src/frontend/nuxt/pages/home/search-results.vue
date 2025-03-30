@@ -129,7 +129,9 @@ export default {
     },
     methods: {
         openFilters() {
-            propertyService.openSearchDialog(this.filters)
+            propertyService.openSearchDialog({ filters: this.filters }).then(result => {
+                result && this.$router.push("/home/search-results")
+            })
         }
     }
 }

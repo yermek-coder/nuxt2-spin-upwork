@@ -1,12 +1,10 @@
 const camelcase = require('lodash.camelcase');
-const requireComponent = require.context('~/components/', true, /\.vue$/)
-const requireServices = require.context('~/services/', false, /\.js$/)
 
 export default async function (context, inject) {
     // Helper
     const IGNORED_PATH_SEGMENTS = ["common"];
 
-    async function filenameToComponentName(filename) {
+    function filenameToComponentName(filename) {
         return camelcase(
             filename
                 .slice(1)
@@ -20,17 +18,19 @@ export default async function (context, inject) {
     }
 
     // Helper
-    async function resolveComponents(spec) {
+    function resolveComponents(spec) {
         const reduced = {}
         for (const path of spec) {
-            const module = requireComponent(path).default;
-            const name = module?.name || (await filenameToComponentName(path));
+            const module = componentsSpec(path).default;
+            const name = module?.name || filenameToComponentName(path);
             reduced[name] = module
         }
+
         return reduced
     }
 
-    const components = await resolveComponents(requireComponent.keys());
+    const componentsSpec = require.context('~/components/', true, /\.vue$/)
+    const components = resolveComponents(componentsSpec.keys());
     inject("components", components)
 
     // Injecting routes array with info about parent of each page
@@ -59,17 +59,22 @@ export default async function (context, inject) {
     }))
 
     // Dependecy injection of global properties into services
-    for (const path of requireServices.keys()) {
-        const service = (await import(`../services${path.slice(1)}`)).default;
+    const servicesSpec = require.context('~/services/', false, /\.js$/)
 
-        Object.keys(service)
-            .filter(attr => attr.startsWith("$"))
-            .forEach(attr => {
-                if (attr === '$router') {
-                    service[attr] = context.app.router
-                } else if (context[attr]) {
-                    service[attr] = context[attr]
+    for (const path of servicesSpec.keys()) {
+        const imports = servicesSpec(path);
+        let services = imports?.default ? [imports.default] : Object.values(imports)
+
+        for (const service of services) {
+            for (const attr in service) {
+                if (attr.startsWith("$")) {
+                    if (attr === '$router') {
+                        service[attr] = context.app.router
+                    } else if (context[attr]) {
+                        service[attr] = context[attr]
+                    }
                 }
-            });
+            }
+        }
     }
 }

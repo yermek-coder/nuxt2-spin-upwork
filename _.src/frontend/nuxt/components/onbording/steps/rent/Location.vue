@@ -1,14 +1,15 @@
 <template>
     <div class="onbording-rent-steps-location d-flex gap-3 justify-center flex-wrap px-10">
-        <v-chip @click="setLocation(item)" v-for="item in options" :key="item" :class="chipClass(item)"
+        <v-chip @click="setLocation(state)" v-for="state in states" :key="state.state_id" :class="chipClass(state)"
             class="justify-center rounded-lg" outlined>
-            {{ item }}
+            {{ state.name }}
         </v-chip>
     </div>
 </template>
 
 <script>
 import { without } from 'underscore';
+import propertyService from '~/services/property';
 
 export default {
     props: ["form"],
@@ -21,29 +22,33 @@ export default {
     },
     data() {
         return {
-            options: [
-                "Petaling Jaya",
-                "Subang Jaya",
-                "Kuala Lumpur",
-                "Shah Alam",
-                "Cheras",
-            ]
+            states: [],
         }
     },
+    mounted() {
+        this.init()
+    },
     methods: {
+        async init() {
+            this.states = await this.$working(propertyService.getStates(), true)
+        },
         chipClass(item) {
-            return (this.form?.locations || []).includes(item) && "primary--text primary"
+            return (this.form?.state || []).includes(item.name) && "primary--text primary"
         },
         setLocation(item) {
-            if (Array.isArray(this.form?.locations)) {
-                if (this.form.locations.includes(item)) {
-                    this.form.locations = without(this.form.locations, item)
+            if ((this.form.state || []).length >= 3) {
+                this.form.state.splice(0, 1)
+            }
+
+            if (Array.isArray(this.form?.state)) {
+                if (this.form.state.includes(item.name)) {
+                    this.form.state = without(this.form.state, item.name)
                 } else {
-                    this.form.locations.push(item)
+                    this.form.state.push(item.name)
                 }
             } else {
-                this.$set(this.form, 'locations', [])
-                this.form.locations.push(item)
+                this.$set(this.form, 'state', [])
+                this.form.state.push(item.name)
             }
         }
     }

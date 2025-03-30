@@ -12,6 +12,7 @@
     "lintfix": "prettier --write --list-different ."
   },
   "dependencies": {
+    "@nuxtjs/proxy": "^2.1.0",
     "canvas-confetti": "^1.9.3",
     "core-js": "^3.25.3",
     "lodash.camelcase": "^4.3.0",

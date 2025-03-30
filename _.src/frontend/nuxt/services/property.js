@@ -1,3 +1,5 @@
+import api from "./api";
+
 const exampleProperties = [
     {
         title: "The Meg",
@@ -63,21 +65,51 @@ const mockProperties = Array(3).fill(exampleProperties).flat()
 
 class PropertyService {
     $modal;
-    $router;
+
+    #propertyTagsCache;
+    #propertyTypesCache;
+    #stateCache;
 
     getProperties() {
         return mockProperties
     }
 
-    openSearchDialog(filters) {
+    async getPropertiesByFilters(filters) {
+        return api.post("user/onboarding/search.php", { ...filters, "last_timestamp": null, "limit": 100 }).then(result => result?.data?.property || [])
+    }
+
+    openSearchDialog(props) {
         return this.$modal({
             component: "PropertyFiltersDialog",
-            props: { filters },
+            props,
             contentClass: 'align-self-start ma-0 rounded-0',
             width: '100%',
             transition: "dialog-top-transition"
-        }).then(result => {
-            result && this.$router.push("/home/search-results")
+        })
+    }
+
+    getStates() {
+        return this.#stateCache || api.post("selection/get.php", { value: ["area-state"] }).then(data => {
+            this.#stateCache = data.area.state;
+            return data.area.state
+        })
+    }
+
+    getBuildings() {
+        return api.post("selection/get.php", { value: ["building"] }).then(data => data.building)
+    }
+
+    getPropertyTypes() {
+        return this.#propertyTypesCache || api.post("selection/get.php", { value: ["propertycategory-high_rise"] }).then(data => {
+            this.#propertyTypesCache = data.propertycategory;
+            return data.propertycategory
+        })
+    }
+
+    getPropertyTags() {
+        return this.#propertyTagsCache || api.post("selection/get.php", { value: ["propertytag"] }).then(data => {
+            this.#propertyTagsCache = data.propertytag;
+            return data.propertytag
         })
     }
 }

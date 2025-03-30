@@ -29,11 +29,15 @@ export default function (_, inject) {
         return date ? new Date(date).toLocaleString('en-EN', SIZES[size]) : "";
     })
 
-    inject("time", function (date, options = { timeStyle: "short" }) {
+    const TIME_SIZES = {
+        default: { timeStyle: "short" },
+        short24: { timeStyle: "short", hour12: false, }
+    }
+    inject("time", function (date, size = 'default') {
         if (date && isString(date) && date.length === 5) {
             date = new Date().toISOString().substring(0, 10) + "T" + date + ":00.000Z";
         }
 
-        return date ? new Date(date).toLocaleTimeString("en-EN", { ...options }) : "";
+        return date ? new Date(date).toLocaleTimeString("en-EN", TIME_SIZES[size]) : "";
     })
 }

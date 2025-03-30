@@ -7,15 +7,15 @@
                 </v-btn>
             </Breadcrumbs>
 
-            <v-chip-group mandatory class="my-3">
-                <v-chip v-for="item in states" :key="item" :value="item" active-class="teal"
+            <v-chip-group v-model="category" mandatory class="my-3">
+                <v-chip v-for="item in categories" :key="item" :value="item" active-class="teal"
                     class="flex-grow-1 justify-center">
                     {{ item }}
                 </v-chip>
             </v-chip-group>
 
             <div class="d-flex flex-column gap-4">
-                <ArticleCardAdmin v-for="(article, idx) in articles" :key="idx" :article="article" />
+                <ArticleCardAdmin v-for="article in filteredArticles" :key="article.article_id" :article="article" />
             </div>
         </v-container>
 
@@ -30,22 +30,42 @@
 </template>
 
 <script>
-import knowledgeService from "@/services/knowledge"
+import {articleService} from "@/services/knowledge"
 
 export default {
     layout: "dark",
     route: {
-        title: "Article"
+        title: "All Articles"
     },
     data() {
         return {
-            states: [
-                "All",
-                "Cleaner",
-                "Plumber",
-                "Electrica",
-            ],
-            articles: knowledgeService.getMyArticles(),
+            categories: ["All"],
+            articles: [],
+            category: ""
+        }
+    },
+    computed: {
+        filteredArticles() {
+            if (this.category === 'All') {
+                return this.articles
+            } else {
+                return this.articles.filter(article => article.label.includes(this.category))
+            }
+        }
+    },
+    created() {
+        this.init()
+    },
+    methods: {
+        async init() {
+            this.articles = await articleService.getMyArticles(1);
+
+            this.articles.forEach(article => {
+                const categories = article.label.split(", ");
+                if (categories.length) {
+                    categories.forEach(category => !this.categories.includes(category) && this.categories.push(category))
+                }
+            });
         }
     }
 }

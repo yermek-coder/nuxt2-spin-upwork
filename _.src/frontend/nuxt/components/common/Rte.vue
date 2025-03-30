@@ -4,10 +4,12 @@
 
 <script>
 import pell from "pell/dist/pell";
+import api from "~/services/api";
+import { IMAGE_TYPES } from '~/util'
 
 const RTE_LINE_BLOCK = 'p';
 
-const BUTTONS_DEFAULT = ["undo", "redo", "bold", "italic", "underline", "paragraph", "heading1", "heading2", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "ulist", "olist", "indent", "unindent"];
+const BUTTONS_DEFAULT = ["undo", "redo", "bold", "italic", "underline", "paragraph", "heading1", "heading2", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "ulist", "olist", "indent", "unindent", "uploadImage"];
 
 const exec = pell.exec;
 const queryCommandState = command => document.queryCommandState(command);
@@ -41,6 +43,7 @@ export default {
             justifyRight: { icon: '<i class="v-icon mdi mdi-format-align-right"></i>', title: "Align right", result: () => exec("justifyRight") },
             justifyFull: { icon: '<i class="v-icon mdi mdi-format-align-justify"></i>', title: "Align full", result: () => exec("justifyFull") },
             removeFormat: { icon: '<i class="v-icon mdi mdi-eraser"></i>', title: "Clear formatting", result: () => exec("removeFormat") },
+            uploadImage: { icon: `<div><i class="v-icon mdi mdi-image-plus"></i><input id="rte-image-upload" accept="${IMAGE_TYPES}" type="file" /></div>`, title: "Add image", result: () => { } },
         };
 
         // Create editor
@@ -49,7 +52,7 @@ export default {
             actions: (this.buttons || BUTTONS_DEFAULT).map(key => ({ ...actions[key], result: () => actions[key].result.call(this, { editor: this.editor, exec, queryCommandState }) })),
             defaultParagraphSeparator: RTE_LINE_BLOCK,
             classes: {
-                button: "v-btn v-btn--icon v-size--small px-0",
+                button: "v-btn v-btn--icon v-size--small px-0 form-upload",
                 actionbar: "pell-actionbar",
                 selected: "active"
             },
@@ -103,6 +106,8 @@ export default {
         if (this.autofocus) {
             this.editor.content.focus();
         }
+
+        document.querySelector('#rte-image-upload').addEventListener("change", this.insertImage)
     },
     watch: {
         value(value) {
@@ -139,6 +144,7 @@ export default {
         onUnmount() {
             // When editor is unmounted
             this.commit();
+            document.querySelector('#rte-image-upload').removeEventListener("change", this.insertImage)
         },
         commit() {
             const content = this.editor.content.innerHTML;
@@ -149,6 +155,21 @@ export default {
         execCommand(...args) {
             exec(...args);
         },
+        async insertImage(event) {
+            // Focus first
+            this.focus();
+
+            // Upload image
+            const formData = new FormData()
+            formData.append("upload", event.target.files[0]);
+
+            const imageUrl = (await this.$working(api.post("agent/ckeditor/upload.php", formData))).url;
+
+            // Append image
+            exec("insertHTML", `<img src="${imageUrl}" />`);
+
+            event.target.value = null
+        }
     }
 };
 </script>

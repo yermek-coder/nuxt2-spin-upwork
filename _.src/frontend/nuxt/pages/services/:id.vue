@@ -70,17 +70,10 @@
             <div class="white rounded-xl pa-4">
                 <div class="text-h7 font-weight-medium mb-2">FAQ</div>
 
-                <v-expansion-panels flat class="gap-4 mb-4">
-                    <v-expansion-panel v-for="(panel, idx) in faq" :key="idx" class="grey lighten-4 rounded-lg">
-                        <v-expansion-panel-header>
-                            <v-icon class="me-3">mdi-comment-question-outline</v-icon>
-                            {{ panel.title }}
-                        </v-expansion-panel-header>
-                        <v-expansion-panel-content>
-                            {{ panel.content }}
-                        </v-expansion-panel-content>
-                    </v-expansion-panel>
-                </v-expansion-panels>
+                <v-card v-for="(panel, idx) in faq" :key="idx" class="grey lighten-4 rounded-lg py-3 px-5 mb-4 elevation-0 d-flex">
+                    <v-icon class="me-3">mdi-comment-question-outline</v-icon>
+                    <div>{{ panel.title }}</div>
+                </v-card>
 
                 <div class="d-flex">
                     <v-btn x-large color="teal lighten-4" class="elevation-0 teal--text flex-grow-1">I have

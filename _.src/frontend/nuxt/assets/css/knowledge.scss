@@ -84,3 +84,7 @@
     border-color: #9e9e9e !important;
     border-width: 1.5px;
 }
+
+.my-videos-grid .video-card {
+    max-width: calc(50% - 1rem);
+}

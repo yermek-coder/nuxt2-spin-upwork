@@ -17,7 +17,7 @@
 
         <v-container class="mt-auto">
             <div class="d-flex gap-4">
-                <v-btn color="primary" x-large outlined>skip</v-btn>
+                <v-btn @click="search" color="primary" x-large outlined>skip</v-btn>
                 <v-btn @click="next" color="primary" x-large class="white--text flex-grow-1">next
                     step ({{ step + 1 }}/{{ features.length }})</v-btn>
             </div>
@@ -27,6 +27,7 @@
 
 <script>
 import featureServices from '~/services/feature';
+import { objectToHttpParams } from '~/util';
 
 export default {
     route: {
@@ -37,7 +38,17 @@ export default {
     data() {
         return {
             step: 0,
-            form: {}
+            form: {
+                "type": "rent",
+                "state": [],
+                "budget":{
+                    "min": 100,
+                    "max": 400000
+                },
+                "property_type": [],
+                "rooms": [],
+                "preferences": [],
+            },
         }
     },
     computed: {
@@ -51,10 +62,13 @@ export default {
     methods: {
         next() {
             if (this.step === this.features.length - 1) {
-                this.$router.push('/home/search-results')
+                this.search()
             }
 
             this.step = Math.min(this.features.length - 1, this.step + 1);
+        },
+        search() {
+            this.$router.push({ path: '/home/search-results2?' + objectToHttpParams(this.form) })
         }
     }
 }

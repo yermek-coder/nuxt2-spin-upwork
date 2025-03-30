@@ -13,17 +13,17 @@
             </v-text-field>
         </v-container>
 
-        <Carousel height="304">
-            <v-carousel-item v-for="(article, idx) in slides" :key="idx" class="px-3">
-                <v-img :src="article.cover" class="align-end rounded-xl" height="304"
+        <Carousel v-if="slides.length" height="304">
+            <v-carousel-item v-for="article in slides" :key="article.article_id" class="px-3">
+                <v-img :src="article.cover_image" class="align-end rounded-xl" height="304"
                     gradient="to top, rgba(18, 18, 18, 0.8) 0%, rgba(18, 18, 18, 0.6) 155px, rgba(0, 0, 0, 0) 206px">
                     <div class="pa-4 d-flex flex-column gap-2">
                         <div class="d-flex gap-1">
-                            <v-chip v-for="tag in article.tags" :key="tag" small>{{ tag }}</v-chip>
+                            <v-chip small>{{ article.label }}</v-chip>
                         </div>
                         <div class="white--text d-flex flex-column gap-2">
                             <div class="text-h6 font-weight-bold">{{ article.title }}</div>
-                            <div>{{ article.location }}</div>
+                            <div>{{ article.user.agency }}</div>
                             <div class="d-flex gap-3 align-center">
                                 <ArticleAuthor :article="article" class="flex-grow-1" />
                                 <v-btn icon>
@@ -65,22 +65,15 @@
 </template>
 
 <script>
+import {knowledgeService} from '~/services/knowledge'
+
 export default {
     route: {
         title: "News"
     },
     data() {
         return {
-            slides: Array(4).fill({
-                cover: "/article-cover.webp",
-                tags: ["Trending"],
-                title: "OPR In Malaysia: How It Affects You",
-                location: "Sunway Velocity, KL",
-                author: {
-                    name: "RYAN REYFORD",
-                    avatar: "/author-avatar.webp"
-                }
-            }),
+            slides: [],
             steps: [
                 { title: "Pre-purchase", icon: "calendar" },
                 { title: "Select Property", icon: "property" },
@@ -93,13 +86,19 @@ export default {
         }
     },
     created() {
-        Promise.all((this.$routes.find(page => page.path === "/knowledge")?.children || []).map(async page => {
-            return ({ ...page, component: await page.component() })
-        })).then(pages => {
+        this.init()
+    },
+    methods: {
+        async init() {
+            const pages = await Promise.all((this.$routes.find(page => page.path === "/knowledge")?.children || [])
+                .map(async page => ({ ...page, component: await page.component() })))
+
             this.tabs = pages
                 .sort((a, b) => (a.component.route.order > b.component.route.order ? 1 : -1))
                 .map(({ path, component, name }) => ({ title: component.route.title, path, name }))
-        })
-    },
+
+            this.slides = await knowledgeService.getFeatured()
+        }
+    }
 }
 </script>

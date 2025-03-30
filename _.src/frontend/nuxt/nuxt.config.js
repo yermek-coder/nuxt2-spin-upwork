@@ -65,8 +65,17 @@ export default {
   ],
 
   modules: [
-
+    '@nuxtjs/proxy'
   ],
+
+  proxy: {
+    '/api/': {
+      target: 'https://test.creatzy.co/myejen/core/public/', // Replace with your target URL
+      pathRewrite: { '^/api': '' }, // Remove "/api" prefix if needed
+      changeOrigin: true,
+      secure: false
+    }
+  },
 
   vuetify: {
     customVariables: ['~/assets/css/vuetify/variables.scss'],

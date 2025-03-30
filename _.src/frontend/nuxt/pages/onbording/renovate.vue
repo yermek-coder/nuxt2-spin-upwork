@@ -57,9 +57,9 @@ export default {
                     component: "SuccessDialog",
                     props: {
                         title: "Submission Successfully!",
-                        description: "Your renovate request has been successfully submitted. You will receive a notification soon."
+                        description: "Your renovate request has been successfully submitted. You will receive a notification soon.",
                     },
-                    fullscreen: true
+                    fullscreen: true,
                 })
             }
         }

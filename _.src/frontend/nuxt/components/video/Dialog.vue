@@ -37,7 +37,7 @@ export default {
         }
     },
     methods: {
-        onVideoClick(e) {
+        onVideoClick() {
             if (this.player.isPaused) {
                 this.player.play()
             } else {

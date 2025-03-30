@@ -15,11 +15,11 @@
                 </v-chip>
             </v-chip-group>
 
-            <component v-if="activeTab" :is="activeTab.component" :filters="cloneFilters" class="mb-3" />
+            <component v-if="activeTab" :is="activeTab.component" :filters="cloneFilters" :node="node" class="mb-3" />
 
             <div class="d-flex gap-2">
                 <v-btn @click="reset" text x-large elevation="0">reset</v-btn>
-                <v-btn @click="$emit('close', 'result')" color="primary" x-large class="white--text flex-grow-1"
+                <v-btn @click="$emit('close', cloneFilters)" color="primary" x-large class="white--text flex-grow-1"
                     elevation="0">confirm</v-btn>
             </div>
         </v-container>
@@ -31,7 +31,7 @@ import featureService from '~/services/feature';
 import { clone } from '~/util';
 
 export default {
-    props: ["filters"],
+    props: { filters: Object, node: { type: String, default: "property-filters-dialog" } },
     data() {
         return {
             tab: null,
@@ -43,7 +43,7 @@ export default {
             return this.tabs.find(tab => tab.component === this.tab)
         },
         tabs() {
-            return featureService.getFeatures("filter", { node: "property-filters-dialog", filters: this.cloneFilters })
+            return featureService.getFeatures("filter", { node: this.node, filters: this.cloneFilters })
         }
     },
     methods: {

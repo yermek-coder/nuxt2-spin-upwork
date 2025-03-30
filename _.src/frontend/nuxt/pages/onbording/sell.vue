@@ -5,7 +5,7 @@
         </v-container>
 
         <v-container>
-            <OnbordingForm class="mb-6" />
+            <OnbordingForm class="mb-6" type="sell" />
             <v-divider class="mb-5"></v-divider>
 
             <div class="text-h6 text-center mb-3">Selling Flow</div>

@@ -24,7 +24,9 @@ export default {
         /** @fixme Focus called multiple time for some reason */
         openFilters: debounce(function () {
             if (this.action) {
-                propertyService.openSearchDialog(this.filters)
+                propertyService.openSearchDialog({ filters: this.filters }).then(result => {
+                    result && this.$router.push("/home/search-results")
+                })
             }
         }, 100)
     }

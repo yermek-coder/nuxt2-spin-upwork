@@ -1,8 +1,8 @@
 <template>
     <div class="d-flex gap-3 flex-wrap justify-center px-10">
-        <v-chip @click="setLocation(item)" v-for="item in options" :key="item" :class="chipClass(item)"
+        <v-chip @click="setRooms(item)" v-for="item in 5" :key="item" :class="chipClass(item)"
             class="justify-center rounded-lg" outlined>
-            {{ item }}
+            {{ item === 1 ? item + ' Room' : item + ' Rooms' }}
         </v-chip>
     </div>
 </template>
@@ -19,22 +19,11 @@ export default {
         title: "How many rooms do you prefer?",
         description: "(Multiple choices allowed)"
     },
-    data() {
-        return {
-            options: [
-                "1 Room",
-                "2 Rooms",
-                "3 Rooms",
-                "4 Rooms",
-                "5 Rooms",
-            ]
-        }
-    },
     methods: {
         chipClass(item) {
             return (this.form?.rooms || []).includes(item) && "primary--text primary"
         },
-        setLocation(item) {
+        setRooms(item) {
             if (Array.isArray(this.form?.rooms)) {
                 if (this.form.rooms.includes(item)) {
                     this.form.rooms = without(this.form.rooms, item)

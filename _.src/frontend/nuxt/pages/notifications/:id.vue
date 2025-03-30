@@ -39,7 +39,7 @@ export default {
                     title: "RM 5 Cash Voucher",
                     description: `Congratulation you got RM 5 Cash Voucher. You can use this voucher based on the T&C.`,
                 },
-                fullscreen: true
+                fullscreen: true,
             })
         }
     }
