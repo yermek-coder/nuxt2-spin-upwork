@@ -13,27 +13,10 @@
 
         <div class="d-flex flex-column gap-3 pa-2 property-card-body">
             <div class="subtitle-2 two-line-truncate">{{ article.title }}</div>
-            <div class="d-flex text--secondary text-body-2 gap-2">
-                <div>Created: {{ $date(article.createdat) }}</div>
+            <div class="d-flex text--secondary text-body-4 gap-2">
+                <div>Created Date: {{ $date(article.createdat) }} {{ $time(article.createdat, 'short24') }}</div>
                 <v-divider vertical></v-divider>
-                <div>Last modified: {{ $date(article.updatedat) }}</div>
-            </div>
-            <div class="d-flex justify-space-between">
-                <v-chip class="text--secondary text-body-3 darken-3 grey outlined">
-                    <v-icon class="text-body-2 me-1">mdi-comment-outline</v-icon>
-                    <div class="me-1">{{ article.comments_count }}</div>
-                    <div>Comments</div>
-                </v-chip>
-                <v-chip class="text--secondary text-body-3 darken-3 grey outlined">
-                    <v-icon class="text-body-2 me-1">mdi-thumb-up-outline</v-icon>
-                    <div class="me-1">{{ article.likes_count }}</div>
-                    <div>Likes</div>
-                </v-chip>
-                <v-chip class="text--secondary text-body-3 darken-3 grey outlined">
-                    <v-icon class="text-body-2 me-1">mdi-share-variant-outline</v-icon>
-                    <div class="me-1">{{ article.share_count }}</div>
-                    <div>Share</div>
-                </v-chip>
+                <div>Last modified: {{ $date(article.updatedat) }} {{ $time(article.updatedat, 'short24') }}</div>
             </div>
         </div>
     </v-card>

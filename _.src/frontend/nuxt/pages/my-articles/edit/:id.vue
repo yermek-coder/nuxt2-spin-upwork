@@ -20,7 +20,7 @@
                         <v-btn @click="step += 1" color="primary" class="ms-1 rounded-lg">Next Step</v-btn>
                     </Breadcrumbs>
                 </v-container>
-                <Rte v-model="article.content" ref="rte" class="pane-body pane" />
+                <Rte v-model="form.content" ref="rte" class="pane-body pane" />
                 <v-sheet class="bottom-sheet elevation-0" outlined>
                     <v-container class="d-flex py-2">
                         <div>{{ wordsCount }} words</div>
@@ -47,20 +47,17 @@
                                 class="rounded-xl grey darken-3" required />
                         </div>
                         <div>
-                            <div class="text-body-3 font-weight-light text--secondary mb-2">Slugs</div>
-                            <v-text-field v-model="form.slugs" placeholder="Slugs" hide-details outlined color="primary"
-                                class="rounded-xl grey darken-3" />
-                        </div>
-                        <div>
                             <div class="text-body-3 font-weight-light text--secondary mb-2">Cover Image</div>
-                            <ImageUploadArea v-model="form.cover" maxSize="1mb"
+                            <ImageUploadArea v-model="form.cover_image" maxSize="1mb"
                                 class="grey darken-3 cover-form-upload" />
                         </div>
                     </div>
                     <div class="rounded-xl pa-4 d-flex flex-column gap-3 grey darken-4">
                         <div class="subtitle-1">Category</div>
                         <div class="d-flex flex-column gap-4">
-                            <div @click="toggleCategory(category.value)" v-for="category in categories"
+                            <v-text-field @keydown.enter.prevent v-model="q" prepend-inner-icon="mdi-magnify" placeholder="Search category" clearable hide-details outlined color="primary"
+                            class="rounded-xl grey darken-3" />
+                            <div @click="toggleCategory(category.value)" v-for="category in filteredCategories"
                                 :key="category.value" :class="[{ active: isSelected(category.value) }]"
                                 class="my-articles-edit-category rounded-lg d-flex flex-grow-1 pa-4 grey darken-3">
                                 <div class="flex-grow-1">{{ category.text }}</div>
@@ -95,9 +92,10 @@ export default {
         return {
             article: {},
             step: 1,
-            form: { category: [], content: "", status: "publish" },
+            form: { category: [], content: "", status: "draft" },
             categories: [],
-            inPreview: false
+            inPreview: false,
+            q: ""
         }
     },
     computed: {
@@ -112,6 +110,13 @@ export default {
         },
         isNew() {
             return this.$route.params.id === 'new'
+        },
+        filteredCategories() {
+            if (this.q?.length) {
+                return this.categories.filter(category => category.text.toLowerCase().includes(this.q.toLowerCase()))
+            } else {
+                return this.categories
+            }
         }
     },
     created() {

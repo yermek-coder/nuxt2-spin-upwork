@@ -55,6 +55,15 @@ class KnowledgeService {
 class ArticleService {
     $modal;
 
+    readingTime(html) {
+        const slugEl = document.createElement("div");
+        slugEl.innerHTML = html;
+        const text = slugEl.innerText;
+        const wpm = 225;
+        const words = text.trim().split(/\s+/).length;
+        return Math.ceil(words / wpm);
+    }
+
     getArticles() {
         return api.post("user/knowledgebase/get.php", { type: "articles" }).then(result => result.data)
     }
@@ -66,22 +75,14 @@ class ArticleService {
     getMyArticles(user_id) {
         return api.post("agent/article/get.php", { user_id }).then(result => result.data.map(article => ({
             ...article,
-            minutes_read: 6,
             cover: article.cover_image.includes("localhost") ? '/article-cover-full.webp' : article.cover_image,
-            comments_count: 23,
-            likes_count: "1K",
-            share_count: 100,
         })))
     }
 
     getMyArticle(user_id, article_id) {
         return api.post("agent/article/get.php", { user_id, article_id }).then(result => ({
             ...result.data,
-            minutes_read: 6,
             cover: result.data.cover_image.includes("localhost") ? '/article-cover-full.webp' : result.data.cover_image,
-            comments_count: 23,
-            likes_count: "1K",
-            share_count: 100,
         }))
     }
 
@@ -146,6 +147,28 @@ class VideoService {
         })
         if (result) {
             return api.post("agent/video/status.php", { video_id: video.video_id, status: 'delete' }).then(() => true)
+        }
+    }
+
+    formatDuration(seconds) {
+        // Handle edge cases
+        if (seconds === 0) return "00:00";
+        if (seconds < 0) return "Invalid duration";
+
+        // Calculate hours, minutes, and remaining seconds
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+
+        // Format with leading zeros
+        const formattedMinutes = minutes.toString().padStart(2, '0');
+        const formattedSeconds = remainingSeconds.toString().padStart(2, '0');
+
+        // Return HH:MM:SS if there are hours, otherwise MM:SS
+        if (hours > 0) {
+            return `${hours}:${formattedMinutes}:${formattedSeconds}`;
+        } else {
+            return `${formattedMinutes}:${formattedSeconds}`;
         }
     }
 }

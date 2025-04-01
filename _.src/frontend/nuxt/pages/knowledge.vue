@@ -14,7 +14,7 @@
         </v-container>
 
         <Carousel v-if="slides.length" height="304">
-            <v-carousel-item v-for="article in slides" :key="article.article_id" class="px-3">
+            <v-carousel-item v-for="article in slides" :key="article.article_id" :to="`/articles/${article.slug}`" class="px-3">
                 <v-img :src="article.cover_image" class="align-end rounded-xl" height="304"
                     gradient="to top, rgba(18, 18, 18, 0.8) 0%, rgba(18, 18, 18, 0.6) 155px, rgba(0, 0, 0, 0) 206px">
                     <div class="pa-4 d-flex flex-column gap-2">

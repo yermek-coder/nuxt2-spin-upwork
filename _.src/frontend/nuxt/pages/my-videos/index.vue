@@ -8,15 +8,17 @@
             </Breadcrumbs>
 
             <v-chip-group v-model="category" mandatory class="my-3">
-                <v-chip v-for="item in categories" :key="item" :value="item" active-class="teal"
-                    class="flex-grow-1 justify-center">
-                    {{ item }}
+                <v-chip v-for="item in categories" :key="item.value" :value="item.value" active-class="teal"
+                    class="flex-grow-1 justify-center text-capitalize">
+                    {{ item.text }}
                 </v-chip>
             </v-chip-group>
 
-            <div class="d-flex flex-wrap gap-4 my-videos-grid">
-                <VideoCardAdmin v-for="video in filteredVideos" :key="video.video_id" :video="video" />
-            </div>
+            <v-row>
+                <v-col v-for="video in filteredVideos" :key="video.video_id" cols="6">
+                    <VideoCardAdmin :video="video" />
+                </v-col>
+            </v-row>
         </v-container>
 
         <v-sheet class="bottom-sheet elevation-0" outlined>
@@ -30,7 +32,7 @@
 </template>
 
 <script>
-import {videoService} from "@/services/knowledge"
+import {videoService, knowledgeService} from "@/services/knowledge"
 
 export default {
     layout: "dark",
@@ -39,17 +41,19 @@ export default {
     },
     data() {
         return {
-            categories: ["All"],
+            categories: [{text: "All", value: 'all'}, ...Object.keys(knowledgeService.statusMap).map(key => ({
+                value: key, text: knowledgeService.statusMap[key].title
+            }))],
             videos: [],
             category: ""
         }
     },
     computed: {
         filteredVideos() {
-            if (this.category === 'All') {
+            if (this.category === 'all') {
                 return this.videos
             } else {
-                return this.videos.filter(video => video.label.includes(this.category))
+                return this.videos.filter(article => article.status === this.category)
             }
         }
     },
@@ -59,13 +63,6 @@ export default {
     methods: {
         async init() {
             this.videos = await videoService.getMyVideos(1);
-
-            this.videos.forEach(video => {
-                const categories = video.label.split(", ");
-                if (categories.length) {
-                    categories.forEach(category => !this.categories.includes(category) && this.categories.push(category))
-                }
-            });
         }
     }
 }

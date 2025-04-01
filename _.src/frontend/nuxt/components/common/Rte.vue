@@ -54,7 +54,7 @@ export default {
             classes: {
                 button: "v-btn v-btn--icon v-size--small px-0 form-upload",
                 actionbar: "pell-actionbar",
-                selected: "active"
+                selected: "teal--text"
             },
             onChange: this.onChanged
         });

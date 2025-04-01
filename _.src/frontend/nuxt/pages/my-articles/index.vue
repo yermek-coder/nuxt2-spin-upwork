@@ -8,9 +8,9 @@
             </Breadcrumbs>
 
             <v-chip-group v-model="category" mandatory class="my-3">
-                <v-chip v-for="item in categories" :key="item" :value="item" active-class="teal"
-                    class="flex-grow-1 justify-center">
-                    {{ item }}
+                <v-chip v-for="item in categories" :key="item.value" :value="item.value" active-class="teal"
+                    class="flex-grow-1 justify-center text-capitalize">
+                    {{ item.text }}
                 </v-chip>
             </v-chip-group>
 
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import {articleService} from "@/services/knowledge"
+import {articleService, knowledgeService} from "@/services/knowledge"
 
 export default {
     layout: "dark",
@@ -39,17 +39,19 @@ export default {
     },
     data() {
         return {
-            categories: ["All"],
+            categories: [{text: "All", value: 'all'}, ...Object.keys(knowledgeService.statusMap).map(key => ({
+                value: key, text: knowledgeService.statusMap[key].title
+            }))],
             articles: [],
             category: ""
         }
     },
     computed: {
         filteredArticles() {
-            if (this.category === 'All') {
+            if (this.category === 'all') {
                 return this.articles
             } else {
-                return this.articles.filter(article => article.label.includes(this.category))
+                return this.articles.filter(article => article.status === this.category)
             }
         }
     },
@@ -59,13 +61,6 @@ export default {
     methods: {
         async init() {
             this.articles = await articleService.getMyArticles(1);
-
-            this.articles.forEach(article => {
-                const categories = article.label.split(", ");
-                if (categories.length) {
-                    categories.forEach(category => !this.categories.includes(category) && this.categories.push(category))
-                }
-            });
         }
     }
 }

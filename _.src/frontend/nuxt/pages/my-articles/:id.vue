@@ -9,12 +9,12 @@
 
             <v-img :src="article.cover" height="142px" gradient="180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,1) 100%"
                 class="align-end rounded-xl mt-3">
-                <div class="d-flex flex-wrap gap-1 ma-3">
+                <div v-if="article.label" class="d-flex flex-wrap gap-1 ma-3">
                     <v-chip x-small class="px-1">{{article.label}}</v-chip>
                 </div>
             </v-img>
 
-            <div class="d-flex flex-column gap-3 py-2">
+            <div v-if="article.createdat" class="d-flex flex-column gap-3 py-2">
                 <div class="text-h6 two-line-truncate">{{ article.title }}</div>
                 <div class="d-flex text--secondary text-body-2 gap-2">
                     <div>Created: {{ $date(article.createdat) }}</div>
@@ -23,6 +23,7 @@
                 </div>
             </div>
 
+            <Loading v-if="loading" />
             <div class="html-content my-3" v-html="article.content"></div>
         </v-container>
 
@@ -53,6 +54,7 @@ export default {
     data() {
         return {
             article: {},
+            loading: false
         }
     },
     created() {
@@ -70,7 +72,10 @@ export default {
             this.$router.push("/my-articles")
         },
         async init() {
-            this.article = await articleService.getMyArticle(1, this.$route.params.id)
+            this.loading = true;
+            articleService.getMyArticle(1, this.$route.params.id)
+                .then(result => this.article = result)
+                .finally(() => this.loading = false)
         }
     }
 }

@@ -28,7 +28,7 @@
                 </v-chip>
             </div>
             <FeatureMarkers node="property-card-2" :entity="property" class="text-body-4 px-2 text--secondary" />
-            <v-divider></v-divider>
+            <v-spacer></v-spacer>
             <div class="property-card-footer px-2 mt-auto mb-2 teal--text text-body-3 font-weight-bold">
                 {{ getPrice(property) }}
             </div>
@@ -62,7 +62,7 @@ export default {
             const keys = ['urgent', 'hightlighted', 'featured']
             const badge = Object.entries(this.property).filter(([key, value]) => keys.includes(key) && !!value)?.[0]?.[0]
             if (badge) {
-                return propertyBadgeMap[badge]
+                return this.propertyBadgeMap[badge]
             }
         }
     },

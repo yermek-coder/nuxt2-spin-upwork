@@ -1,5 +1,5 @@
 <template>
-    <v-card outlined :img="preview || value"
+    <v-card outlined :img="preview"
         class="rounded-xl d-flex gap-3 py-12 align-center justify-center form-upload image-upload-area">
         <Icon icon="image" />
         <div class="d-flex gap-1 flex-column justify-center">
@@ -25,7 +25,7 @@ export default {
     },
     data() {
         return {
-            preview: "",
+            preview: this.value,
             types: IMAGE_TYPES,
         }
     },

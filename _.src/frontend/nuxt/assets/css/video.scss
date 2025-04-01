@@ -24,3 +24,20 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.video-card-thumbnail {
+    position: relative;
+    height: 168px;
+    width: 100%;
+}
+
+.video-card-thumbnail video {
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.video-card-thumbnail .v-badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

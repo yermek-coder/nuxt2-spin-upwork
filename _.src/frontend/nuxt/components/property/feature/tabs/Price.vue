@@ -31,7 +31,7 @@
                 <span class="caption text-body-3">Reset</span>
             </div>
 
-            <v-range-slider v-model="range" :max="550000" :min="10000" thumb-color="primary" thumb-label="always"
+            <v-range-slider v-model="range" :max="550000" :min="0" thumb-color="primary" thumb-label="always"
                 track-fill-color="primary" track-color="grey lighten-3" class="align-center white--text">
                 <template #thumb-label="{ value }">${{ currency(value) }}K</template>
             </v-range-slider>
@@ -41,7 +41,7 @@
 
 <script>
 const priceMap = {
-    '100K Below': [10000, 100000],
+    '100K Below': [0, 100000],
     '100K - 150K': [100000, 150000],
     '150K - 200K': [150000, 200000],
     '300K - 350K': [300000, 350000],
